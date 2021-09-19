@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Product } from '../product/product.model';
 import { ProductsService } from '../product/products.service';
 
@@ -8,21 +9,18 @@ import { ProductsService } from '../product/products.service';
 })
 export class AppDataStoreService {
 
-  private appProductsStore = new BehaviorSubject<Product[]>([]);
-  private appProductsStore$ = this.appProductsStore.asObservable();
+  private productsStore = new BehaviorSubject<Product[]>([]);
+  public productsStore$ = this.productsStore.asObservable();
 
   constructor(private productsService: ProductsService) { }
 
   setProducts(products: Product[]) {
-    this.appProductsStore.next(products);
+    this.productsStore.next(products);
   }
 
   loadProducts() {
-    this.appProductsStore$ = this.productsService.getProducts();
+    this.productsService.getProducts().pipe(take(1)).subscribe(res => this.setProducts(res));
   }
-
-  getProducts(): Observable<Product[]> {
-    return this.appProductsStore$;
-  }
-
 }
+
+

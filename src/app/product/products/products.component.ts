@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.products$ = this.appDataStore.getProducts();
+    this.products$ = this.appDataStore.productsStore$;
   }
 
 }
