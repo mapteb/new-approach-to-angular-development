@@ -1,0 +1,9 @@
+<div class="error">{{errorMessage}}</div>
+<h4>List of Products</h4>
+
+<div *ngFor="let product of (products$ | async);">
+  {{product.name}}
+</div>
+<p>&nbsp;</p>
+<p>
+</p>
