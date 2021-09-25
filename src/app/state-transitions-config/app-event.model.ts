@@ -1,4 +1,3 @@
-
 import { AppEvent } from "./app-events.enum";
 import { AppState } from "./app-states.enum";
 import { AppData } from "./app-data.model";

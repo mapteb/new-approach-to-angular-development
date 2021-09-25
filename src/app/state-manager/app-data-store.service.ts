@@ -10,12 +10,15 @@ import { ProductsService } from '../product/products.service';
 export class AppDataStoreService {
 
   private productsStore = new BehaviorSubject<Product[]>([]);
-  public productsStore$ = this.productsStore.asObservable();
 
   constructor(private productsService: ProductsService) { }
 
   setProducts(products: Product[]) {
     this.productsStore.next(products);
+  }
+
+  getProducts(): Product[] {
+    return this.productsStore.getValue();
   }
 
   loadProducts() {

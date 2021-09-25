@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-
-import { AppData } from '../../state-transitions-config/app-data.model';
-import { AppDataStoreService } from 'src/app/state-manager/app-data-store.service';
+import { AppDataStoreService } from '../../state-manager/app-data-store.service';
 import { Product } from '../product.model';
 
 @Component({
@@ -13,14 +9,12 @@ import { Product } from '../product.model';
 })
 export class ProductsComponent implements OnInit {
 
-  products$: Observable<Product[]>;
-  errorMessage: string;
+  products: Product[];
 
-  constructor(private appDataStore: AppDataStoreService, private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+  constructor(private appDataStore: AppDataStoreService) { }
 
   ngOnInit(): void {
-    this.products$ = this.appDataStore.productsStore$;
+    this.products = this.appDataStore.getProducts();
   }
 
 }

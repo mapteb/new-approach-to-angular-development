@@ -1,5 +1,4 @@
 
-
 export enum AppEvent {
     onload = "onload",
     onload_success = "onload_success",
