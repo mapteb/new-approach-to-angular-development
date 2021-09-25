@@ -1,4 +1,4 @@
-# NewApproachToAngularDevelopment
+# [New Approach to Angular Development](https://github.com/mapteb/new-approach-to-angular-development)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.6.
 
