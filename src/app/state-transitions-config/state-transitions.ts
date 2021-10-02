@@ -1,12 +1,9 @@
 /**
-  UNKNOWN       -> onload   -> processOnload()  -> onload_success   -> ONLOADSUCCESS
-  ONLOADSUCCESS -> home     -> processHome()    -> home_success     -> HOMEVIEW
-  HOMEVIEW      -> products -> processHome()    -> products_success -> PRODUCTSVIEW
-  PRODUCTSVIEW  -> product  -> processProduct() -> product_success  -> PODUCTVIEW
-
+ * 
   UNKNOWN       -> onload   -> processOnload()  -> onload_success   -> HOMEVIEW
   HOMEVIEW      -> products -> processHome()    -> products_success -> PRODUCTSVIEW
   PRODUCTSVIEW  -> product  -> processProduct() -> product_success  -> PODUCTVIEW
+ *
 */
 
 import { AppDataStoreService } from '../state-manager/app-data-store.service';
@@ -14,7 +11,7 @@ import { AppEventModel } from './app-event.model';
 import { AppEvent } from './app-events.enum';
 import { AppState } from './app-states.enum';
 
-export const PreEventToPreStatesConfig = {
+export const PreEventToInitialStatesConfig = {
     onload: [AppState.UNKNOWN],
     products: [AppState.HOMEVIEW, AppState.PRODUCTVIEW],
     product: [AppState.PRODUCTSVIEW]
@@ -52,7 +49,7 @@ export const PreEventToProcessConfig = {
     }
 }
 
-export const PostEventToPostStateConfig = {
+export const PostEventToFinalStateConfig = {
     onload_success: AppState.HOMEVIEW,
     products_success: AppState.PRODUCTSVIEW,
     product_success: AppState.PRODUCTVIEW
