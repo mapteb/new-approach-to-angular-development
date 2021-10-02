@@ -27,7 +27,6 @@ export class ProductsComponent extends BaseComponent implements OnInit {
   }
 
   handlePoductEvent(evt: string, productId: any) {
-    console.log(">> handlePoductEvent: ", productId)
     const appData = new AppData();
     appData.product.id = productId;
     super.handlePostEvent(evt, AppState.PRODUCTSVIEW, appData);

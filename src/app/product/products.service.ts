@@ -18,7 +18,7 @@ export class ProductsService {
   }
 
   public getProduct(id: any): Observable<Product> {
-    //TODO: call a REST service to get the products
+    //TODO: call a REST service to get the product
     return of(new Product(id, "product_" + id, 12.11*id));
   }
 }

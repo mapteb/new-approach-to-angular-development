@@ -23,8 +23,8 @@ export class BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.appEventModel.appState) {
-      this.handlePostEvent(AppEvent.onload, AppState.UNKNOWN);
+    if (!this.appEventModel) {
+      this.handlePostEvent(null, null);
     }
   }
 

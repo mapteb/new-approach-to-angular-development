@@ -20,17 +20,18 @@ export class StateManagerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(">> preStates: ", PreEventToPreStatesConfig[this.appEventModel.appEvent], this.appEventModel.appEvent);
-    if (PreEventToPreStatesConfig[this.appEventModel.appEvent].includes(this.appEventModel.appState)) {
+    if (this.appEventModel && this.appEventModel.appEvent && this.appEventModel.appState &&
+      PreEventToPreStatesConfig[this.appEventModel.appEvent].includes(this.appEventModel.appState)) {
+      console.log(">> pre event: ", this.appEventModel.appEvent);
       this.appEventModel = PreEventToProcessConfig[this.appEventModel.appEvent]
                             .process(this.appEventModel, this.appDataStore);
       this.appEventModel.appState = PostEventToPostStateConfig[this.appEventModel.appEvent];
-      console.log(">> final state: ", PostEventToPostStateConfig[this.appEventModel.appEvent], this.appEventModel.appEvent);                     
       const path = PostStateToPathConfig[this.appEventModel.appState];
       this.router.navigate([path], { state: { appEvent: this.appEventModel } });
     } else {
-      this.appEventModel.message = { error: "Illegal access" };
-      this.router.navigate(["/**"], { state: { appEvent: this.appEventModel } });
+      const appEventModel = new AppEventModel();
+      appEventModel.message = { error: "Illegal access" };
+      this.router.navigate(["/**"], { state: { appEvent: appEventModel } });
     }
   }
 }
