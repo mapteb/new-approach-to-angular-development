@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AppEventModel } from '../state-transitions-config/app-event.model';
-import { PostEventToFinalStateConfig, PostStateToPathConfig, PreEventToInitialStatesConfig, PreEventToProcessConfig } from '../state-transitions-config/state-transitions';
+import { PostEventToFinalStateConfig, FinalStateToPathConfig, PreEventToInitialStatesConfig, PreEventToProcessConfig } from '../state-transitions-config/state-transitions';
 import { AppDataStoreService } from './app-data-store.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class StateManagerComponent implements OnInit {
       this.appEventModel = PreEventToProcessConfig[this.appEventModel.appEvent]
                             .process(this.appEventModel, this.appDataStore);
       this.appEventModel.appState = PostEventToFinalStateConfig[this.appEventModel.appEvent];
-      const path = PostStateToPathConfig[this.appEventModel.appState];
+      const path = FinalStateToPathConfig[this.appEventModel.appState];
       this.router.navigate([path], { state: { appEvent: this.appEventModel } });
     } else {
       const appEventModel = new AppEventModel();

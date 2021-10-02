@@ -55,7 +55,7 @@ export const PostEventToFinalStateConfig = {
     product_success: AppState.PRODUCTVIEW
 }
 
-export const PostStateToPathConfig = {
+export const FinalStateToPathConfig = {
     HOMEVIEW: "home",
     PRODUCTSVIEW: "products",
     PRODUCTVIEW: "product",
