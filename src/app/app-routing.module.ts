@@ -4,8 +4,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HomeComponent } from './home/home.component';
 import { StateManagerComponent } from './state-manager/state-manager.component';
 import { ProductsComponent } from './product/products/products.component';
+import { ProductComponent } from './product/product/product.component';
 
 const appRoutes: Routes = [
+  { path: 'product', component: ProductComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'home', component: HomeComponent },
   { path: 'state-manager', component: StateManagerComponent },

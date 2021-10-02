@@ -14,6 +14,11 @@ export class ProductsService {
 
   public getProducts(): Observable<Product[]> {
     //TODO: call a REST service to get the products
-    return of([new Product(++this.productsCount, "product_1", 12.11), new Product(++this.productsCount, "product_2", 22.70)]);
+    return of([new Product(1, "product_1", 12.11), new Product(2, "product_2", 22.70)]);
+  }
+
+  public getProduct(id: any): Observable<Product> {
+    //TODO: call a REST service to get the products
+    return of(new Product(id, "product_" + id, 12.11*id));
   }
 }
