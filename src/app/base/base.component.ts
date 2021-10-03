@@ -27,6 +27,12 @@ export class BaseComponent implements OnInit {
     }
   }
 
+  protected validateRoutingRequest(appState: AppState) {
+    if (!this.appEventModel || this.appEventModel.appState !== appState) {
+      this.handlePostEvent(null, null);
+    }
+  }
+
   protected handlePostEvent(evt: string, appState: AppState, appData?: AppData) {
     if (evt) {
       this.appEventModel.appEvent = AppEvent[evt];

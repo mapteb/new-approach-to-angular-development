@@ -17,7 +17,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void { 
-    super.ngOnInit();
+    this.validateRoutingRequest(AppState.HOMEVIEW);
   }
 
   handleProductsEvent(evt: string) {
