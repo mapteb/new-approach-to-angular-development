@@ -8,8 +8,7 @@ import { AppState } from '../state-transitions-config/app-states.enum';
 
 @Component({
   selector: 'app-base',
-  template: ``,
-  styleUrls: ['./base.component.css']
+  template: ``
 })
 export class BaseComponent implements OnInit {
 
@@ -38,5 +37,4 @@ export class BaseComponent implements OnInit {
     }
     this.router.navigate(['/state-manager'], { state: { appEvent: this.appEventModel } });
   }
-
 }
