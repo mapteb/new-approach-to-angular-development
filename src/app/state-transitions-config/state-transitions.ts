@@ -1,8 +1,9 @@
 /**
  * 
-  UNKNOWN       -> onload   -> processOnload()  -> onload_success   -> HOMEVIEW
-  HOMEVIEW      -> products -> processHome()    -> products_success -> PRODUCTSVIEW
-  PRODUCTSVIEW  -> product  -> processProduct() -> product_success  -> PODUCTVIEW
+  UNKNOWN       -> onload   -> processOnload()   s-> onload_success   -> HOMEVIEW
+  HOMEVIEW      -> products -> processProducts() -> products_success -> PRODUCTSVIEW
+  PRODUCTSVIEW  -> product  -> processProduct()  -> product_success  -> PODUCTVIEW
+  PODUCTVIEW    -> products -> processProducts() -> products_success -> PRODUCTSVIEW
  *
 */
 

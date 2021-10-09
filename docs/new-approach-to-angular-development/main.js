@@ -23,35 +23,55 @@ module.exports = __webpack_require__(/*! C:\Users\nrsenthil\gitmapteb\new-approa
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductsComponent", function() { return ProductsComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _state_manager_app_data_store_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../state-manager/app-data-store.service */ "zPF+");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var src_app_base_base_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/base/base.component */ "d4jW");
+/* harmony import */ var src_app_state_transitions_config_app_data_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/state-transitions-config/app-data.model */ "uVom");
+/* harmony import */ var src_app_state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/state-transitions-config/app-states.enum */ "phQ/");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _state_manager_app_data_store_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../state-manager/app-data-store.service */ "zPF+");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "ofXK");
+
+
+
+
 
 
 
 
 function ProductsComponent_div_2_Template(rf, ctx) { if (rf & 1) {
+    const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "a", 1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ProductsComponent_div_2_Template_a_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r3); const product_r1 = ctx.$implicit; const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r2.handlePoductEvent("product", product_r1.id); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const product_r1 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", product_r1.name, "\n");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](product_r1.name);
 } }
-class ProductsComponent {
-    constructor(appDataStore) {
-        this.appDataStore = appDataStore;
+class ProductsComponent extends src_app_base_base_component__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"] {
+    constructor(router, appDataStoreService) {
+        super(router);
+        this.router = router;
+        this.appDataStoreService = appDataStoreService;
     }
     ngOnInit() {
-        this.products = this.appDataStore.getProducts();
+        this.validateRoutingRequest(src_app_state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_3__["AppState"].PRODUCTSVIEW);
+        this.products = this.appDataStoreService.getProducts();
+    }
+    handlePoductEvent(evt, productId) {
+        const appData = new src_app_state_transitions_config_app_data_model__WEBPACK_IMPORTED_MODULE_2__["AppData"]();
+        appData.product.id = productId;
+        this.handlePostEvent(evt, src_app_state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_3__["AppState"].PRODUCTSVIEW, appData);
     }
 }
-ProductsComponent.ɵfac = function ProductsComponent_Factory(t) { return new (t || ProductsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_state_manager_app_data_store_service__WEBPACK_IMPORTED_MODULE_1__["AppDataStoreService"])); };
-ProductsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ProductsComponent, selectors: [["app-products"]], decls: 6, vars: 1, consts: [[4, "ngFor", "ngForOf"]], template: function ProductsComponent_Template(rf, ctx) { if (rf & 1) {
+ProductsComponent.ɵfac = function ProductsComponent_Factory(t) { return new (t || ProductsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_state_manager_app_data_store_service__WEBPACK_IMPORTED_MODULE_5__["AppDataStoreService"])); };
+ProductsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ProductsComponent, selectors: [["app-products"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵInheritDefinitionFeature"]], decls: 6, vars: 1, consts: [[4, "ngFor", "ngForOf"], [3, "routerLink", "click"]], template: function ProductsComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h4");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "List of Products");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, ProductsComponent_div_2_Template, 2, 1, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, ProductsComponent_div_2_Template, 3, 1, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "p");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "\u00A0");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -59,7 +79,7 @@ ProductsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.products);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgForOf"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Byb2R1Y3QvcHJvZHVjdHMvcHJvZHVjdHMuY29tcG9uZW50LmNzcyJ9 */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_6__["NgForOf"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterLinkWithHref"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Byb2R1Y3QvcHJvZHVjdHMvcHJvZHVjdHMuY29tcG9uZW50LmNzcyJ9 */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ProductsComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -67,7 +87,7 @@ ProductsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
                 templateUrl: './products.component.html',
                 styleUrls: ['./products.component.css']
             }]
-    }], function () { return [{ type: _state_manager_app_data_store_service__WEBPACK_IMPORTED_MODULE_1__["AppDataStoreService"] }]; }, null); })();
+    }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }, { type: _state_manager_app_data_store_service__WEBPACK_IMPORTED_MODULE_5__["AppDataStoreService"] }]; }, null); })();
 
 
 /***/ }),
@@ -110,30 +130,28 @@ class AppEventModel {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _state_transitions_config_app_event_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../state-transitions-config/app-event.model */ "9p6y");
-/* harmony import */ var _state_transitions_config_app_events_enum__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../state-transitions-config/app-events.enum */ "cIQc");
-/* harmony import */ var _state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../state-transitions-config/app-states.enum */ "phQ/");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _base_base_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../base/base.component */ "d4jW");
+/* harmony import */ var _state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../state-transitions-config/app-states.enum */ "phQ/");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
 
 
 
 
 
-
-class HomeComponent {
+class HomeComponent extends _base_base_component__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"] {
     constructor(router) {
+        super(router);
         this.router = router;
     }
-    ngOnInit() { }
-    handlePostEvent(evt) {
-        let appEventModel = new _state_transitions_config_app_event_model__WEBPACK_IMPORTED_MODULE_1__["AppEventModel"]();
-        appEventModel.appEvent = _state_transitions_config_app_events_enum__WEBPACK_IMPORTED_MODULE_2__["AppEvent"][evt];
-        appEventModel.appState = _state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_3__["AppState"].HOMEVIEW;
-        this.router.navigate(['/state-manager'], { state: { appEvent: appEventModel } });
+    ngOnInit() {
+        this.validateRoutingRequest(_state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].HOMEVIEW);
+    }
+    handleProductsEvent(evt) {
+        this.handlePostEvent(evt, _state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].HOMEVIEW);
     }
 }
-HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"])); };
-HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["app-home"]], decls: 8, vars: 0, consts: [[1, "leftm"], [1, "content"], [1, "row"], [1, "col-2"], [3, "click"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
+HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"])); };
+HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["app-home"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵInheritDefinitionFeature"]], decls: 8, vars: 0, consts: [[1, "leftm"], [1, "content"], [1, "row"], [1, "col-2"], [3, "click"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
@@ -141,7 +159,7 @@ HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, " Home Works! ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "p");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "button", 4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function HomeComponent_Template_button_click_6_listener() { return ctx.handlePostEvent("products"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function HomeComponent_Template_button_click_6_listener() { return ctx.handleProductsEvent("products"); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, "Products");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -157,7 +175,7 @@ HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
                 templateUrl: './home.component.html',
                 styleUrls: ['./home.component.css']
             }]
-    }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }]; }, null); })();
+    }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }]; }, null); })();
 
 
 /***/ }),
@@ -194,74 +212,134 @@ const environment = {
 /*!***************************************************************!*\
   !*** ./src/app/state-transitions-config/state-transitions.ts ***!
   \***************************************************************/
-/*! exports provided: EventToPathMappings, EvenToProcessMappings */
+/*! exports provided: PreEventToInitialStatesConfig, PreEventToProcessConfig, PostEventToFinalStateConfig, FinalStateToPathConfig */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventToPathMappings", function() { return EventToPathMappings; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EvenToProcessMappings", function() { return EvenToProcessMappings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PreEventToInitialStatesConfig", function() { return PreEventToInitialStatesConfig; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PreEventToProcessConfig", function() { return PreEventToProcessConfig; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PostEventToFinalStateConfig", function() { return PostEventToFinalStateConfig; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FinalStateToPathConfig", function() { return FinalStateToPathConfig; });
 /* harmony import */ var _app_events_enum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app-events.enum */ "cIQc");
 /* harmony import */ var _app_states_enum__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-states.enum */ "phQ/");
 /**
-  UNKNOWN       -> onload   -> processOnload()  -> onload_success   -> ONLOADSUCCESS
-  ONLOADSUCCESS -> home     -> processHome()    -> home_success     -> HOMEVIEW
-  HOMEVIEW      -> products -> processHome()    -> products_success -> PRODUCTSVIEW
-  PRODUCTSVIEW  -> poduct   -> processProduct() -> product_success  -> PODUCTVIEW
+ *
+  UNKNOWN       -> onload   -> processOnload()   s-> onload_success   -> HOMEVIEW
+  HOMEVIEW      -> products -> processProducts() -> products_success -> PRODUCTSVIEW
+  PRODUCTSVIEW  -> product  -> processProduct()  -> product_success  -> PODUCTVIEW
+  PODUCTVIEW    -> products -> processProducts() -> products_success -> PRODUCTSVIEW
+ *
 */
 
 
-const EventToPathMappings = {
-    onload_success: {
-        getPath: function (appState) {
-            if (_app_states_enum__WEBPACK_IMPORTED_MODULE_1__["AppState"].ONLOADSUCCESS) {
-                return "/home";
-            }
-            else {
-                return "/**";
-            }
-        }
-    },
-    products_success: {
-        getPath: function (appState) {
-            if (_app_states_enum__WEBPACK_IMPORTED_MODULE_1__["AppState"].HOMEVIEW) {
-                return "/products";
-            }
-            else {
-                return "/**";
-            }
-        }
-    }
+const PreEventToInitialStatesConfig = {
+    onload: [_app_states_enum__WEBPACK_IMPORTED_MODULE_1__["AppState"].UNKNOWN],
+    products: [_app_states_enum__WEBPACK_IMPORTED_MODULE_1__["AppState"].HOMEVIEW, _app_states_enum__WEBPACK_IMPORTED_MODULE_1__["AppState"].PRODUCTVIEW],
+    product: [_app_states_enum__WEBPACK_IMPORTED_MODULE_1__["AppState"].PRODUCTSVIEW]
 };
-const EvenToProcessMappings = {
+const PreEventToProcessConfig = {
     onload: {
         process: function (appEventModel, appDataStore) {
-            if (appEventModel.appState === _app_states_enum__WEBPACK_IMPORTED_MODULE_1__["AppState"].UNKNOWN) {
-                //TODO: check whether the user is signed in and has required ROLE
-                //TODO: pre-fetch data if needed 
-                appEventModel.appEvent = _app_events_enum__WEBPACK_IMPORTED_MODULE_0__["AppEvent"].onload_success;
-            }
-            else {
-                //TODO: implement onload_error
-            }
+            //TODO: check whether the user is signed in and has required ROLE
+            //TODO: pre-fetch data if needed 
+            appEventModel.appEvent = _app_events_enum__WEBPACK_IMPORTED_MODULE_0__["AppEvent"].onload_success;
             return appEventModel;
         }
     },
     products: {
         process: function (appEventModel, appDataStore) {
-            if (appEventModel.appState === _app_states_enum__WEBPACK_IMPORTED_MODULE_1__["AppState"].HOMEVIEW) {
-                //TODO: check whether the user is signed in and has required ROLE
-                //TODO: pre-fetch data if needed
-                appDataStore.loadProducts();
-                appEventModel.appEvent = _app_events_enum__WEBPACK_IMPORTED_MODULE_0__["AppEvent"].products_success;
-            }
-            else {
-                //TODO: implement products_error
-            }
+            //TODO: check whether the user is signed in and has required ROLE
+            //TODO: pre-fetch data if needed
+            appDataStore.loadProducts();
+            appEventModel.appEvent = _app_events_enum__WEBPACK_IMPORTED_MODULE_0__["AppEvent"].products_success;
+            return appEventModel;
+        }
+    },
+    product: {
+        process: function (appEventModel, appDataStore) {
+            //TODO: check whether the user is signed in and has required ROLE
+            //TODO: pre-fetch data if needed
+            appDataStore.loadProduct(appEventModel.appData.product.id);
+            appEventModel.appEvent = _app_events_enum__WEBPACK_IMPORTED_MODULE_0__["AppEvent"].product_success;
             return appEventModel;
         }
     }
 };
+const PostEventToFinalStateConfig = {
+    onload_success: _app_states_enum__WEBPACK_IMPORTED_MODULE_1__["AppState"].HOMEVIEW,
+    products_success: _app_states_enum__WEBPACK_IMPORTED_MODULE_1__["AppState"].PRODUCTSVIEW,
+    product_success: _app_states_enum__WEBPACK_IMPORTED_MODULE_1__["AppState"].PRODUCTVIEW
+};
+const FinalStateToPathConfig = {
+    HOMEVIEW: "home",
+    PRODUCTSVIEW: "products",
+    PRODUCTVIEW: "product",
+};
+
+
+/***/ }),
+
+/***/ "JFRm":
+/*!******************************************************!*\
+  !*** ./src/app/product/product/product.component.ts ***!
+  \******************************************************/
+/*! exports provided: ProductComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductComponent", function() { return ProductComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_app_base_base_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/base/base.component */ "d4jW");
+/* harmony import */ var src_app_state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/state-transitions-config/app-states.enum */ "phQ/");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var src_app_state_manager_app_data_store_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/state-manager/app-data-store.service */ "zPF+");
+
+
+
+
+
+
+class ProductComponent extends src_app_base_base_component__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"] {
+    constructor(router, appDataStore) {
+        super(router);
+        this.router = router;
+        this.appDataStore = appDataStore;
+    }
+    ngOnInit() {
+        this.validateRoutingRequest(src_app_state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].PRODUCTVIEW);
+        this.product = this.appDataStore.getProduct();
+    }
+    handlePoductsEvent(evt) {
+        this.handlePostEvent(evt, src_app_state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].PRODUCTVIEW);
+    }
+}
+ProductComponent.ɵfac = function ProductComponent_Factory(t) { return new (t || ProductComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_state_manager_app_data_store_service__WEBPACK_IMPORTED_MODULE_4__["AppDataStoreService"])); };
+ProductComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ProductComponent, selectors: [["app-product"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵInheritDefinitionFeature"]], decls: 8, vars: 2, consts: [[3, "click"]], template: function ProductComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h4");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Product Details");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "hr");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "button", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ProductComponent_Template_button_click_6_listener() { return ctx.handlePoductsEvent("products"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, "Back to Products");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"](" ", ctx.product.name, " Price: ", ctx.product.price, "\n");
+    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Byb2R1Y3QvcHJvZHVjdC9wcm9kdWN0LmNvbXBvbmVudC5jc3MifQ== */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ProductComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-product',
+                templateUrl: './product.component.html',
+                styleUrls: ['./product.component.css']
+            }]
+    }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }, { type: src_app_state_manager_app_data_store_service__WEBPACK_IMPORTED_MODULE_4__["AppDataStoreService"] }]; }, null); })();
 
 
 /***/ }),
@@ -287,7 +365,6 @@ class AppComponent {
         this.title = "Angular View Transitions";
     }
     ngOnInit() {
-        this.router.navigate(["/"]);
     }
 }
 AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"])); };
@@ -340,6 +417,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home/home.component */ "9vUh");
 /* harmony import */ var _page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./page-not-found/page-not-found.component */ "rQPh");
 /* harmony import */ var _product_products_products_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./product/products/products.component */ "14IT");
+/* harmony import */ var _product_product_product_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./product/product/product.component */ "JFRm");
+/* harmony import */ var _base_base_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./base/base.component */ "d4jW");
+
+
 
 
 
@@ -368,7 +449,9 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
         _home_home_component__WEBPACK_IMPORTED_MODULE_6__["HomeComponent"],
         _page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_7__["PageNotFoundComponent"],
-        _product_products_products_component__WEBPACK_IMPORTED_MODULE_8__["ProductsComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
+        _product_products_products_component__WEBPACK_IMPORTED_MODULE_8__["ProductsComponent"],
+        _product_product_product_component__WEBPACK_IMPORTED_MODULE_9__["ProductComponent"],
+        _base_base_component__WEBPACK_IMPORTED_MODULE_10__["BaseComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
         _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__["BrowserAnimationsModule"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormsModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"]] }); })();
@@ -385,7 +468,9 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector
                     _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
                     _home_home_component__WEBPACK_IMPORTED_MODULE_6__["HomeComponent"],
                     _page_not_found_page_not_found_component__WEBPACK_IMPORTED_MODULE_7__["PageNotFoundComponent"],
-                    _product_products_products_component__WEBPACK_IMPORTED_MODULE_8__["ProductsComponent"]
+                    _product_products_products_component__WEBPACK_IMPORTED_MODULE_8__["ProductsComponent"],
+                    _product_product_product_component__WEBPACK_IMPORTED_MODULE_9__["ProductComponent"],
+                    _base_base_component__WEBPACK_IMPORTED_MODULE_10__["BaseComponent"]
                 ],
                 bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
             }]
@@ -408,9 +493,67 @@ var AppEvent;
 (function (AppEvent) {
     AppEvent["onload"] = "onload";
     AppEvent["onload_success"] = "onload_success";
-    AppEvent["products_success"] = "products_success";
     AppEvent["products"] = "products";
+    AppEvent["products_success"] = "products_success";
+    AppEvent["product"] = "product";
+    AppEvent["product_success"] = "product_success";
 })(AppEvent || (AppEvent = {}));
+
+
+/***/ }),
+
+/***/ "d4jW":
+/*!****************************************!*\
+  !*** ./src/app/base/base.component.ts ***!
+  \****************************************/
+/*! exports provided: BaseComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseComponent", function() { return BaseComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _state_transitions_config_app_events_enum__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../state-transitions-config/app-events.enum */ "cIQc");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
+
+
+
+class BaseComponent {
+    constructor(router) {
+        this.router = router;
+        const navigationExtras = this.router.getCurrentNavigation().extras;
+        if (navigationExtras && navigationExtras.state) {
+            this.appEventModel = navigationExtras.state.appEvent;
+        }
+    }
+    ngOnInit() {
+        if (!this.appEventModel)
+            this.handlePostEvent(null, null);
+    }
+    validateRoutingRequest(appState) {
+        if (!this.appEventModel || this.appEventModel.appState !== appState) {
+            this.handlePostEvent(null, null);
+        }
+    }
+    handlePostEvent(evt, appState, appData) {
+        if (evt) {
+            this.appEventModel.appEvent = _state_transitions_config_app_events_enum__WEBPACK_IMPORTED_MODULE_1__["AppEvent"][evt];
+            this.appEventModel.appState = appState;
+            if (appData)
+                this.appEventModel.appData = appData;
+        }
+        this.router.navigate(['/state-manager'], { state: { appEvent: this.appEventModel } });
+    }
+}
+BaseComponent.ɵfac = function BaseComponent_Factory(t) { return new (t || BaseComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
+BaseComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: BaseComponent, selectors: [["app-base"]], decls: 0, vars: 0, template: function BaseComponent_Template(rf, ctx) { }, encapsulation: 2 });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](BaseComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-base', template: ``
+            }]
+    }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }]; }, null); })();
 
 
 /***/ }),
@@ -446,13 +589,21 @@ class StateManagerComponent {
             this.appEventModel = navigationExtras.state.appEvent;
         }
     }
-    ;
     ngOnInit() {
-        this.appEventModel = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["EvenToProcessMappings"][this.appEventModel.appEvent]
-            .process(this.appEventModel, this.appDataStore);
-        const path = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["EventToPathMappings"][this.appEventModel.appEvent]
-            .getPath(this.appEventModel.appState);
-        this.router.navigate([path], { state: { appEvent: this.appEventModel } });
+        if (this.appEventModel && this.appEventModel.appEvent && this.appEventModel.appState &&
+            _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["PreEventToInitialStatesConfig"][this.appEventModel.appEvent].includes(this.appEventModel.appState)) {
+            console.log(">> pre event: ", this.appEventModel.appEvent);
+            this.appEventModel = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["PreEventToProcessConfig"][this.appEventModel.appEvent]
+                .process(this.appEventModel, this.appDataStore);
+            this.appEventModel.appState = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["PostEventToFinalStateConfig"][this.appEventModel.appEvent];
+            const path = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["FinalStateToPathConfig"][this.appEventModel.appState];
+            this.router.navigate([path], { state: { appEvent: this.appEventModel } });
+        }
+        else {
+            const appEventModel = new _state_transitions_config_app_event_model__WEBPACK_IMPORTED_MODULE_1__["AppEventModel"]();
+            appEventModel.message = { error: "Illegal access" };
+            this.router.navigate(["/**"], { state: { appEvent: appEventModel } });
+        }
     }
 }
 StateManagerComponent.ɵfac = function StateManagerComponent_Factory(t) { return new (t || StateManagerComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_app_data_store_service__WEBPACK_IMPORTED_MODULE_4__["AppDataStoreService"])); };
@@ -481,10 +632,9 @@ __webpack_require__.r(__webpack_exports__);
 var AppState;
 (function (AppState) {
     AppState["UNKNOWN"] = "UNKNOWN";
-    AppState["ONLOADSUCCESS"] = "ONLOADSUCCESS";
     AppState["HOMEVIEW"] = "HOMEVIEW";
-    AppState["PRODUCTSUCCESS"] = "PRODUCTSUCCESS";
     AppState["PRODUCTSVIEW"] = "PRODUCTSVIEW";
+    AppState["PRODUCTVIEW"] = "PRODUCTVIEW";
 })(AppState || (AppState = {}));
 
 
@@ -501,18 +651,35 @@ var AppState;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageNotFoundComponent", function() { return PageNotFoundComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _base_base_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../base/base.component */ "d4jW");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
 
 
-class PageNotFoundComponent {
-    constructor() { }
+
+
+class PageNotFoundComponent extends _base_base_component__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"] {
+    constructor(router) {
+        super(router);
+        this.router = router;
+        this.message = '';
+    }
     ngOnInit() {
+        if (this.appEventModel) {
+            this.message = this.appEventModel.message.error;
+        }
     }
 }
-PageNotFoundComponent.ɵfac = function PageNotFoundComponent_Factory(t) { return new (t || PageNotFoundComponent)(); };
-PageNotFoundComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: PageNotFoundComponent, selectors: [["app-page-not-found"]], decls: 2, vars: 0, template: function PageNotFoundComponent_Template(rf, ctx) { if (rf & 1) {
+PageNotFoundComponent.ɵfac = function PageNotFoundComponent_Factory(t) { return new (t || PageNotFoundComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
+PageNotFoundComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: PageNotFoundComponent, selectors: [["app-page-not-found"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵInheritDefinitionFeature"]], decls: 4, vars: 1, template: function PageNotFoundComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h2");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Page not found");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.message);
     } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2Utbm90LWZvdW5kL3BhZ2Utbm90LWZvdW5kLmNvbXBvbmVudC5jc3MifQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](PageNotFoundComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
@@ -521,7 +688,7 @@ PageNotFoundComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵde
                 templateUrl: './page-not-found.component.html',
                 styleUrls: ['./page-not-found.component.css']
             }]
-    }], function () { return []; }, null); })();
+    }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }]; }, null); })();
 
 
 /***/ }),
@@ -541,7 +708,6 @@ __webpack_require__.r(__webpack_exports__);
 class AppData {
     constructor() {
         this.products = [];
-        this.cartProducts = [];
         this.product = new _product_product_model__WEBPACK_IMPORTED_MODULE_0__["Product"]();
     }
 }
@@ -588,6 +754,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./home/home.component */ "9vUh");
 /* harmony import */ var _state_manager_state_manager_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./state-manager/state-manager.component */ "dTJj");
 /* harmony import */ var _product_products_products_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./product/products/products.component */ "14IT");
+/* harmony import */ var _product_product_product_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./product/product/product.component */ "JFRm");
+
 
 
 
@@ -597,6 +765,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const appRoutes = [
+    { path: 'product', component: _product_product_product_component__WEBPACK_IMPORTED_MODULE_6__["ProductComponent"] },
     { path: 'products', component: _product_products_products_component__WEBPACK_IMPORTED_MODULE_5__["ProductsComponent"] },
     { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"] },
     { path: 'state-manager', component: _state_manager_state_manager_component__WEBPACK_IMPORTED_MODULE_4__["StateManagerComponent"] },
@@ -648,7 +817,11 @@ class ProductsService {
     }
     getProducts() {
         //TODO: call a REST service to get the products
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])([new _product_model__WEBPACK_IMPORTED_MODULE_2__["Product"](++this.productsCount, "product_1", 12.11), new _product_model__WEBPACK_IMPORTED_MODULE_2__["Product"](++this.productsCount, "product_2", 22.70)]);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])([new _product_model__WEBPACK_IMPORTED_MODULE_2__["Product"](1, "product_1", 12.11), new _product_model__WEBPACK_IMPORTED_MODULE_2__["Product"](2, "product_2", 22.70)]);
+    }
+    getProduct(id) {
+        //TODO: call a REST service to get the product
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(new _product_model__WEBPACK_IMPORTED_MODULE_2__["Product"](id, "product_" + id, 12.11 * id));
     }
 }
 ProductsService.ɵfac = function ProductsService_Factory(t) { return new (t || ProductsService)(); };
@@ -686,6 +859,7 @@ class AppDataStoreService {
     constructor(productsService) {
         this.productsService = productsService;
         this.productsStore = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
+        this.productStore = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
     }
     setProducts(products) {
         this.productsStore.next(products);
@@ -693,8 +867,17 @@ class AppDataStoreService {
     getProducts() {
         return this.productsStore.getValue();
     }
+    setProduct(product) {
+        this.productStore.next(product);
+    }
+    getProduct() {
+        return this.productStore.getValue();
+    }
     loadProducts() {
         this.productsService.getProducts().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1)).subscribe(res => this.setProducts(res));
+    }
+    loadProduct(id) {
+        this.productsService.getProduct(id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1)).subscribe(res => this.setProduct(res));
     }
 }
 AppDataStoreService.ɵfac = function AppDataStoreService_Factory(t) { return new (t || AppDataStoreService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_product_products_service__WEBPACK_IMPORTED_MODULE_3__["ProductsService"])); };

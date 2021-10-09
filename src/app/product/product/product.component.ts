@@ -26,7 +26,7 @@ export class ProductComponent extends BaseComponent implements OnInit {
   }
 
   handlePoductsEvent(evt: string) {
-    super.handlePostEvent(evt, AppState.PRODUCTVIEW);
+    this.handlePostEvent(evt, AppState.PRODUCTVIEW);
   }
 
 }

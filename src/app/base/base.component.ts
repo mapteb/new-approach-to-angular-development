@@ -7,13 +7,11 @@ import { AppEvent } from '../state-transitions-config/app-events.enum';
 import { AppState } from '../state-transitions-config/app-states.enum';
 
 @Component({
-  selector: 'app-base',
-  template: ``
+  selector: 'app-base', template: ``
 })
 export class BaseComponent implements OnInit {
-
   protected appEventModel: AppEventModel;
-  
+
   constructor(protected router: Router) {
     const navigationExtras: NavigationExtras = this.router.getCurrentNavigation().extras;
     if (navigationExtras && navigationExtras.state) {
@@ -22,9 +20,7 @@ export class BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.appEventModel) {
-      this.handlePostEvent(null, null);
-    }
+    if (!this.appEventModel) this.handlePostEvent(null, null);
   }
 
   protected validateRoutingRequest(appState: AppState) {
@@ -37,9 +33,7 @@ export class BaseComponent implements OnInit {
     if (evt) {
       this.appEventModel.appEvent = AppEvent[evt];
       this.appEventModel.appState = appState;
-      if (appData) {
-        this.appEventModel.appData = appData;
-      }
+      if (appData) this.appEventModel.appData = appData;
     }
     this.router.navigate(['/state-manager'], { state: { appEvent: this.appEventModel } });
   }
