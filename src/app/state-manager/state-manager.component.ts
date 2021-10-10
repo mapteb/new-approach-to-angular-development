@@ -22,7 +22,6 @@ export class StateManagerComponent implements OnInit {
   ngOnInit(): void {
     if (this.appEventModel && this.appEventModel.appEvent && this.appEventModel.appState &&
       PreEventToInitialStatesConfig[this.appEventModel.appEvent].includes(this.appEventModel.appState)) {
-      console.log(">> pre event: ", this.appEventModel.appEvent);
       this.appEventModel = PreEventToProcessConfig[this.appEventModel.appEvent]
                             .process(this.appEventModel, this.appDataStore);
       this.appEventModel.appState = PostEventToFinalStateConfig[this.appEventModel.appEvent];

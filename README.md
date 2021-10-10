@@ -1,27 +1,39 @@
-# [New Approach to Angular Development](https://github.com/mapteb/new-approach-to-angular-development)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.6.
+This project proposes a new apprpoach to developing Angular applications. In the conventional approach components forward navigation requests and events directly to the target components and services. In the proposed approach navigation requests and events are forwarded to a broker component which in turn forwards the requests to the target components/services. The broker component ensures that the state transitions are valid. The resulting Angular application is therefore fully state machine conformant and robust. The approach is demonstrated in a simple SPA with three views - Home, Products List and Product Details.
 
-## Development server
+The approach uses the following steps:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. List the state transitions for the required application
+2. Configure the states, events and processes identified in the state transitions in Typescript enum and const variables
+3. Generate a starter app using Angular cli
+4. Add the components and sevices needed using Angular cli
+5. Create a broker component that implements the listed state transitions
+6. Forward the events raised in each application component to the broker component
 
-## Code scaffolding
+## State Transitions:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+A simple SPA with [thee views](https://mapteb.github.io/new-approach-to-angular-development) is considered to illustrate this approach. The Home page has a Products button, the Products List page has list of products that are hyperlinked to a corresponding Product Details page. The product Details page has a Back to Products button. The state transitions for this application can be written as:
+   
+<strong>Initial State</strong> | <strong>Pre-event</strong> | <strong>Processor</strong> | <strong>Post-event</strong>     | <strong>Final State</strong>
+----------------- | ------------------ |------------------ | ------------------ | ------------------ 
+  UNKNOWN       -> | onload   -> | processOnload()   -> | onload_success   -> | HOMEVIEW
+  HOMEVIEW      -> | products -> | processProducts() -> | products_success -> | PRODUCTSVIEW
+  PRODUCTSVIEW  -> | product  -> | processProduct()  -> | product_success  -> | PODUCTVIEW
+  PODUCTVIEW    -> | products -> | processProducts() -> | products_success -> | PRODUCTSVIEW
 
-## Build
+## Configurations:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+The events, application states and process methods identified in the state transitions table above are configured in TypeScript const variables like:[state-transions.ts](https://github.com/mapteb/angular-a-development-pattern/blob/main/src/app/state-transitions/state-transitions.ts)
 
-## Running unit tests
+## State Manager Component
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The application components forward their events (along with a payload) to a navigation broker component. The State Manager Component acts like a navigation broker component that uses the above Typescipt const configurations to ensure that the state transitions are valid. Optionally, the state manager component can handle athentication, authorization, pre-fetching data, etc.  
 
-## Running end-to-end tests
+## Demo
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+A demo of this project can be viewed [here](https://mapteb.github.io/angular-a-development-pattern) where all the state transitions listed above can be tested.
 
-## Further help
+## Benefits
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+1. The resulting Angular application is fully state machine conformant and therefore robust.
+2. The architecture of the approach enables producing code that follows clean code guidelines.
