@@ -9,7 +9,7 @@ The approach uses the following steps:
 3. Generate a starter app using Angular cli
 4. Add the components and sevices needed using Angular cli
 5. Create a broker component that implements the identified state transitions
-6. Forward the events raised in each application component to the broker component
+6. Update the application components to forward the events raised to the broker component
 
 ## State Transitions:
 
