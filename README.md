@@ -24,17 +24,18 @@ A simple SPA with [thee views](https://mapteb.github.io/new-approach-to-angular-
 
 ## Configurations:
 
-The events, application states and process methods identified in the state transitions table above are configured in TypeScript const variables like:[state-transions.ts](https://github.com/mapteb/angular-a-development-pattern/blob/main/src/app/state-transitions/state-transitions.ts)
+The events, application states are configured using Typescript enum variables like: [app=events.enum.ts]() and [app-states.enum.ts]() and the process methods identified in the state transitions table above are configured in TypeScript const variables like:[state-transions.ts](https://github.com/mapteb/angular-a-development-pattern/blob/main/src/app/state-transitions/state-transitions.ts)
 
 ## State Manager Component
 
-The application components forward their events (along with a payload) to a navigation broker component. The State Manager Component acts like a navigation broker component that uses the above Typescipt const configurations to ensure that the state transitions are valid. Optionally, the state manager component can handle athentication, authorization, pre-fetching data, etc.  
+The application components forward their events (along with a payload) to a navigation broker component. The [State Manager Component](https://github.com/mapteb/new-approach-to-angular-development/blob/main/src/app/state-manager/state-manager.component.ts) acts like a navigation broker that forwards the events to the target components and services. It uses the above Typescipt configurations to ensure that the state transitions are valid. Optionally, the state manager component can also handle athentication, authorization, pre-fetching data, etc.  
 
 ## Demo
 
-A demo of this project can be viewed [here](https://mapteb.github.io/angular-a-development-pattern) where all the state transitions listed above can be tested.
+A demo of this project can be viewed [here](https://mapteb.github.io/angular-a-development-pattern) where all the four state transitions listed above can be tested.
 
 ## Benefits
 
 1. The resulting Angular application is fully state machine conformant and therefore robust.
-2. The architecture of the approach enables producing code that follows clean code guidelines.
+2. The architecture of the approach enables producing Angular code that follows clean code guidelines.
+3. The approach provides a template which makes it easy for the developer to add/update Angular components
