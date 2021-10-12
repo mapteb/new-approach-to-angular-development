@@ -5,11 +5,11 @@ This project proposes a new apprpoach to developing Angular applications. In the
 The approach uses the following steps:
 
 1. Identify the state transitions for the required application
-2. Configure the states, events and processes identified in the state transitions in Typescript const variables
+2. Configure the states, events and processes identified in the state transitions in Typescript enum and const variables
 3. Generate a starter app using Angular cli
 4. Add the components and sevices needed using Angular cli
 5. Create a broker component that implements the identified state transitions
-6. Update the application components to forward the events raised to the broker component
+6. Update the application components to forward the events to the broker component
 
 ## State Transitions:
 
@@ -24,7 +24,7 @@ A simple SPA with [thee views](https://mapteb.github.io/new-approach-to-angular-
 
 ## Configurations:
 
-The events, application states are configured using Typescript enum variables like: [app=events.enum.ts]() and [app-states.enum.ts]() and the process methods identified in the state transitions table above are configured in TypeScript const variables like:[state-transions.ts](https://github.com/mapteb/angular-a-development-pattern/blob/main/src/app/state-transitions/state-transitions.ts)
+The events, application states are configured using Typescript enum variables like: [app-events.enum.ts](https://github.com/mapteb/new-approach-to-angular-development/blob/main/src/app/state-transitions-config/app-events.enum.ts) and [app-states.enum.ts](https://github.com/mapteb/new-approach-to-angular-development/blob/main/src/app/state-transitions-config/app-states.enum.ts) and the process methods identified in the state transitions table above are configured in TypeScript const variables like:[state-transions.ts](https://github.com/mapteb/new-approach-to-angular-development/blob/main/src/app/state-transitions-config/state-transitions.ts)
 
 ## State Manager Component
 
