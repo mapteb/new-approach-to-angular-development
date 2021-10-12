@@ -1,13 +1,13 @@
 # A New Approach to Angular Development
 
-This project proposes a new apprpoach to developing Angular applications. In the conventional approach components forward navigation requests and events directly to the target components and services. In the proposed approach navigation requests and events are forwarded to a broker component which in turn forwards the requests to the target components/services. The broker component ensures that the state transitions are valid. The resulting Angular application is therefore fully state machine conformant and robust. The approach is demonstrated in a simple SPA with [thee views](https://mapteb.github.io/new-approach-to-angular-development) - Home, Products List and Product Details.
+This project proposes a new approach to developing Angular applications. In the conventional approach components forward navigation requests and events directly to the target components and services. In the proposed approach navigation requests and events are forwarded to a broker component which in turn forwards the requests to the target components/services. The broker component ensures that the state transitions are valid. The resulting Angular application is therefore fully state machine conformant and robust. The approach is demonstrated in a simple SPA with [thee views](https://mapteb.github.io/new-approach-to-angular-development) - Home, Products List and Product Details.
 
 The approach uses the following steps:
 
 1. Identify the state transitions for the required application
 2. Configure the states, events and processes identified in the state transitions in Typescript enum and const variables
 3. Generate a starter app using Angular cli
-4. Add the components and sevices needed using Angular cli
+4. Add the components and services needed using Angular cli
 5. Create a broker component that implements the identified state transitions
 6. Update the application components to forward the events to the broker component
 
