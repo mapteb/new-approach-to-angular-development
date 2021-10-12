@@ -32,7 +32,7 @@ The application components forward their events (along with a payload) to a navi
 
 ## Demo
 
-A demo of this project can be viewed [here](https://mapteb.github.io/angular-a-development-pattern) where all the four state transitions listed above can be tested.
+A demo of this project can be viewed [here](https://mapteb.github.io/new-approach-to-angular-development) where all the four state transitions listed above can be tested.
 
 ## Benefits
 
