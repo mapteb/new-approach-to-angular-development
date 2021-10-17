@@ -36,6 +36,6 @@ A demo of this project can be viewed [here](https://mapteb.github.io/new-approac
 
 ## Benefits
 
-1. The resulting Angular application is fully state machine conformant and therefore robust.
+1. The proposed approach enables creating Angular applications that are fully state machine conformant and therefore robust.
 2. The architecture of the approach enables producing Angular code that follows clean code guidelines.
-3. The approach provides a template which makes it easy for the developer to add/update Angular components
+3. The approach provides a template which makes it easy to develop Angular applications.
