@@ -20,17 +20,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Angular View Transitions'`, () => {
+  it(`should have as title 'A New Approach to Angular Development'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Angular View Transitions');
+    expect(app.title).toEqual('A New Approach to Angular Development');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.componentInstance.title = 'Angular View Transitions';
+    fixture.componentInstance.title = 'A New Approach to Angular Development';
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('section h2').textContent).toContain('Angular View Transitions');
+    expect(compiled.querySelector('section h2').textContent).toContain('A New Approach to Angular Development');
   });
 });

@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  title = "Angular View Transitions";
+  title = "A New Approach to Angular Development";
 
   constructor(private router: Router) { }
 
