@@ -8,6 +8,7 @@
 */
 
 import { AppDataStoreService } from '../state-manager/app-data-store.service';
+import { AppData } from './app-data.model';
 import { AppEventModel } from './app-event.model';
 import { AppEvent } from './app-events.enum';
 import { AppState } from './app-states.enum';
@@ -33,7 +34,9 @@ export const PreEventToProcessConfig = {
             AppEventModel {
             //TODO: check whether the user is signed in and has required ROLE
             //TODO: pre-fetch data if needed
-            appDataStore.loadProducts();
+            const appData = new AppData();
+            appData.products = appDataStore.getProducts();
+            appEventModel.appData = appData;
             appEventModel.appEvent = AppEvent.products_success;
             return appEventModel;
         }
@@ -43,7 +46,9 @@ export const PreEventToProcessConfig = {
             AppEventModel {
             //TODO: check whether the user is signed in and has required ROLE
             //TODO: pre-fetch data if needed
-            appDataStore.loadProduct(appEventModel.appData.product.id);
+            const appData = new AppData();
+            appData.product = appDataStore.getProduct(appEventModel.appData.product.id);
+            appEventModel.appData = appData;
             appEventModel.appEvent = AppEvent.product_success;
             return appEventModel;
         }

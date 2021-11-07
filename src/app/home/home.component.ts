@@ -23,5 +23,4 @@ export class HomeComponent extends BaseComponent implements OnInit {
   handleProductsEvent(evt: string) {
     this.handlePostEvent(evt, AppState.HOMEVIEW);
   }
-
 }

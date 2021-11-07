@@ -10,7 +10,6 @@ import { ProductsService } from '../product/products.service';
 export class AppDataStoreService {
 
   private productsStore = new BehaviorSubject<Product[]>([]);
-  private productStore = new BehaviorSubject<Product>(null);
 
   constructor(private productsService: ProductsService) { }
 
@@ -19,15 +18,31 @@ export class AppDataStoreService {
   }
 
   getProducts(): Product[] {
+    if (!this.productsStore.getValue() || this.productsStore.getValue().length === 0) {
+      this.loadProducts();
+    }
     return this.productsStore.getValue();
   }
 
   setProduct(product: Product) {
-    this.productStore.next(product);
+    this.productsStore.next(this.getProducts().map(p => {
+      if (p.id === product.id) {
+        return product;
+      } else {
+        return p;
+      }
+    }));
   }
 
-  getProduct(): Product {
-    return this.productStore.getValue();
+  getProduct(id: number): Product {
+    let product: Product;
+    if (this.getProducts() && this.getProducts().length > 0) {
+      product = this.getProducts().find(p => p.id === id);
+      if (!product.price) {
+        this.loadProduct(id);
+      }
+    }
+    return this.getProducts().find(p => p.id === id);
   }
 
   loadProducts() {
