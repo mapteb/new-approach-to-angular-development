@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AppEventModel } from '../state-transitions-config/app-event.model';
-import { PostEventToFinalStateConfig, FinalStateToPathConfig, PreEventToInitialStatesConfig, PreEventToProcessConfig } from '../state-transitions-config/state-transitions';
+import { PostEventToFinalStateConfig, 
+         FinalStateToPathConfig, 
+         PreEventToInitialStatesConfig, 
+         PreEventToProcessConfig } from '../state-transitions-config/state-transitions';
 import { AppDataStoreService } from './app-data-store.service';
 
 @Component({

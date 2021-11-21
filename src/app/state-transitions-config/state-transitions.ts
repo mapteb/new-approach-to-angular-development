@@ -1,3 +1,9 @@
+import { AppDataStoreService } from '../state-manager/app-data-store.service';
+import { AppData } from './app-data.model';
+import { AppEventModel } from './app-event.model';
+import { AppEvent } from './app-events.enum';
+import { AppState } from './app-states.enum';
+
 /**
  * 
   UNKNOWN       -> onload   -> processOnload()   -> onload_success   -> HOMEVIEW
@@ -6,12 +12,6 @@
   PODUCTVIEW    -> products -> processProducts() -> products_success -> PRODUCTSVIEW
  *
 */
-
-import { AppDataStoreService } from '../state-manager/app-data-store.service';
-import { AppData } from './app-data.model';
-import { AppEventModel } from './app-event.model';
-import { AppEvent } from './app-events.enum';
-import { AppState } from './app-states.enum';
 
 export const PreEventToInitialStatesConfig = {
     onload: [AppState.UNKNOWN],

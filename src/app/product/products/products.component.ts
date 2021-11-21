@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { BaseComponent } from '../../base/base.component';
 import { AppData } from '../../state-transitions-config/app-data.model';
-import { AppEventModel } from '../../state-transitions-config/app-event.model';
-import { AppEvent } from '../../state-transitions-config/app-events.enum';
 import { AppState } from '../../state-transitions-config/app-states.enum';
-import { AppDataStoreService } from '../../state-manager/app-data-store.service';
 import { Product } from '../product.model';
 
 @Component({
