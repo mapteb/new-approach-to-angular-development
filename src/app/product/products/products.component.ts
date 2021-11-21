@@ -22,7 +22,6 @@ export class ProductsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void { 
-    this.validateRoutingRequest(AppState.PRODUCTSVIEW);
     this.products = this.appEventModel.appData.products;
   }
 
@@ -31,5 +30,4 @@ export class ProductsComponent extends BaseComponent implements OnInit {
     appData.product.id = productId;
     this.handlePostEvent(evt, AppState.PRODUCTSVIEW, appData);
   }
-
 }

@@ -16,9 +16,6 @@ export class PageNotFoundComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.appEventModel) {
-      this.message = this.appEventModel.message.error;
-    }
+    this.message = this.appEventModel.message.error;
   }
-
 }

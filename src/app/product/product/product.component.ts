@@ -21,7 +21,6 @@ export class ProductComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.validateRoutingRequest(AppState.PRODUCTVIEW);
     this.product = this.appEventModel.appData.product;
   }
 

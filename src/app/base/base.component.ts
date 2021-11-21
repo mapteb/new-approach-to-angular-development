@@ -16,17 +16,13 @@ export class BaseComponent implements OnInit {
     const navigationExtras: NavigationExtras = this.router.getCurrentNavigation().extras;
     if (navigationExtras && navigationExtras.state) {
       this.appEventModel = navigationExtras.state.appEvent;
+    } else {
+      this.handlePostEvent(null, null);
     }
   }
 
   ngOnInit(): void {
     if (!this.appEventModel) this.handlePostEvent(null, null);
-  }
-
-  protected validateRoutingRequest(appState: AppState) {
-    if (!this.appEventModel || this.appEventModel.appState !== appState) {
-      this.handlePostEvent(null, null);
-    }
   }
 
   protected handlePostEvent(evt: string, appState: AppState, appData?: AppData) {
