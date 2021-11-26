@@ -13,6 +13,7 @@ import { AppState } from './app-states.enum';
   UNKNOWN       -> home     -> processHome()     -> home_success     -> HOMEVIEW
   HOMEVIEW      -> products -> processProducts() -> products_success -> PRODUCTSVIEW
   PRODUCTSVIEW  -> product  -> processProduct()  -> product_success  -> PODUCTVIEW
+  PODUCTVIEW    -> products -> processProducts() -> products_success -> PRODUCTSVIEW
  *
 */
 
