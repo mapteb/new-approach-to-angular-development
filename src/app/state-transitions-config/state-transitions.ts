@@ -30,7 +30,7 @@ export const PreEventToInitialStatesConfig = {
  * Configure the process that should be triggered when a pre-event is raised
  * The functions used here can also be imported from individual files
  * These functions pre-fetch data so the Angular component can load fast
- * These functions can, optionally, 
+ * These functions can, optionally, check user role for authorization
  */
 export const PreEventToProcessConfig = {
     home: {
@@ -46,7 +46,6 @@ export const PreEventToProcessConfig = {
         process: function (appEventModel: AppEventModel, appDataStore: AppDataStoreService): 
             AppEventModel {
             //TODO: check whether the user is signed in and has required ROLE
-            //TODO: pre-fetch data if needed
             const appData = new AppData();
             appData.products = appDataStore.getProducts();
             appEventModel.appData = appData;
@@ -58,7 +57,6 @@ export const PreEventToProcessConfig = {
         process: function (appEventModel: AppEventModel, appDataStore: AppDataStoreService): 
             AppEventModel {
             //TODO: check whether the user is signed in and has required ROLE
-            //TODO: pre-fetch data if needed
             const appData = new AppData();
             appData.product = appDataStore.getProduct(appEventModel.appData.product.id);
             appEventModel.appData = appData;
