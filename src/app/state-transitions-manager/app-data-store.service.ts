@@ -4,6 +4,10 @@ import { take } from 'rxjs/operators';
 import { Product } from '../product/product.model';
 import { ProductsService } from '../product/products.service';
 
+/**
+ * This injectable service retries and stores the data requested
+ * This service can, optionally, cache the data as needed
+ */
 @Injectable({
   providedIn: 'root'
 })

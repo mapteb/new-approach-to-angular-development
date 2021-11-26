@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
+/**
+ * This Angular component just loads the layout component
+ */
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -10,8 +12,8 @@ export class AppComponent implements OnInit {
 
   title = "A New Approach to Angular Development";
 
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
+  constructor() {
   }
+
+  ngOnInit() {}
 }

@@ -9,6 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ProductsComponent } from './product/products/products.component';
 import { ProductComponent } from './product/product/product.component';
 import { BaseComponent } from './base/base.component';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { BaseComponent } from './base/base.component';
     PageNotFoundComponent,
     ProductsComponent,
     ProductComponent,
-    BaseComponent
+    BaseComponent,
+    LayoutComponent
   ],
   bootstrap: [ AppComponent ]
 })

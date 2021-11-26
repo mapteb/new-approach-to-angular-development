@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
 
+/**
+ * This Angular component displays an error message
+ * when the navigation request does not conform to one of the
+ * the valid state transitions.
+ */
 @Component({
   selector: 'app-page-not-found',
   templateUrl: './page-not-found.component.html',
@@ -16,6 +21,10 @@ export class PageNotFoundComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.message = this.appEventModel.message.error;
+    if (this.appEventModel) {
+      this.message = this.appEventModel.message.error;
+    } else {
+      this.message = 'Unknown access error';
+    }
   }
 }

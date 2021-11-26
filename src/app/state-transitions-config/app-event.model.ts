@@ -10,7 +10,7 @@ export class AppEventModel {
 
     constructor() {
         this.appState = AppState.UNKNOWN;
-        this.appEvent = AppEvent.onload;
+        this.appEvent = AppEvent.home;
         this.appData = new AppData();
     }
 }

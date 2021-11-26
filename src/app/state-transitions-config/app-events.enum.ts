@@ -1,7 +1,7 @@
 
 export enum AppEvent {
-    onload = "onload",
-    onload_success = "onload_success",
+    home = "home",
+    home_success = "home_success",
     products = "products",
     products_success = "products_success",
     product = "product",

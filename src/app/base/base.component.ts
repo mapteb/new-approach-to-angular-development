@@ -5,6 +5,11 @@ import { AppEventModel } from '../state-transitions-config/app-event.model';
 import { AppEvent } from '../state-transitions-config/app-events.enum';
 import { AppState } from '../state-transitions-config/app-states.enum';
 
+/**
+ * This Angular base component ensures that all navigation
+ * requests are routed through the StateTransitionsManagerComponent.
+ * Otherwise, the user is redirected to the home page.
+ */
 @Component({
   selector: 'app-base', template: ``
 })
@@ -12,24 +17,26 @@ export class BaseComponent implements OnInit {
   protected appEventModel: AppEventModel;
 
   constructor(protected router: Router) {
-    const navigationExtras: NavigationExtras = this.router.getCurrentNavigation().extras;
-    if (navigationExtras && navigationExtras.state) {
-      this.appEventModel = navigationExtras.state.appEvent;
-    } else {
-      this.handlePostEvent(null, null);
+    if (this.router.getCurrentNavigation()) {
+      const navigationExtras: NavigationExtras = this.router.getCurrentNavigation().extras;
+      if (navigationExtras && navigationExtras.state) {
+        this.appEventModel = navigationExtras.state.appEvent;
+      } 
     }
   }
 
   ngOnInit(): void {
-    if (!this.appEventModel) this.handlePostEvent(null, null);
+    if (!this.appEventModel) {
+      this.handleAppEvent(null, null);
+    }
   }
 
-  protected handlePostEvent(evt: string, appState: AppState, appData?: AppData) {
-    if (evt) {
+  protected handleAppEvent(evt: string, appState: AppState, appData?: AppData) {
+    if (evt && this.appEventModel) {
       this.appEventModel.appEvent = AppEvent[evt];
       this.appEventModel.appState = appState;
       if (appData) this.appEventModel.appData = appData;
     }
-    this.router.navigate(['/state-manager'], { state: { appEvent: this.appEventModel } });
+    this.router.navigate(['/state-transitions-manager'], { state: { appEvent: this.appEventModel } });
   }
 }

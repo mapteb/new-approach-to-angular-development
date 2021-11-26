@@ -3,6 +3,9 @@ import { NavigationExtras, Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
 import { AppState } from '../state-transitions-config/app-states.enum';
 
+/**
+ * This Angular component displays the home page content
+ */
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,9 +18,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  handleProductsEvent(evt: string) {
-    this.handlePostEvent(evt, AppState.HOMEVIEW);
+    super.ngOnInit();
   }
 }

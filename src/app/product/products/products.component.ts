@@ -12,19 +12,22 @@ import { Product } from '../product.model';
 })
 export class ProductsComponent extends BaseComponent implements OnInit {
 
-  products: Product[];
+  products: Product[] = [];
 
   constructor(protected router: Router) {
     super(router);
   }
 
   ngOnInit(): void { 
+    super.ngOnInit();
     this.products = this.appEventModel.appData.products;
   }
 
+  // a handler for the user raised event
+  // delegate the event handling to the base class
   handlePoductEvent(evt: string, productId: any) {
     const appData = new AppData();
     appData.product.id = productId;
-    this.handlePostEvent(evt, AppState.PRODUCTSVIEW, appData);
+    this.handleAppEvent(evt, AppState.PRODUCTSVIEW, appData);
   }
 }
