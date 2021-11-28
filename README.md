@@ -28,7 +28,7 @@ The events, application states are configured using Typescript enum variables li
 
 ## State Transitions Manager Component
 
-The application components forward their events (along with a payload) to a navigation broker component. The [State Transitions Manager Component](https://github.com/mapteb/new-approach-to-angular-development/blob/main/src/app/state-transitions-manager/state-transitions-manager.component.ts) acts like a navigation broker that forwards the events to the target components and services. It uses the above Typescipt configurations to ensure that the state transitions are valid. Optionally, the state manager component can also handle athentication, authorization, pre-fetching data, etc.  
+The application components forward their events (along with a payload) to a navigation broker component. The [State Transitions Manager Component](https://github.com/mapteb/new-approach-to-angular-development/blob/main/src/app/state-transitions-manager/state-transitions-manager.component.ts) acts like a navigation broker that forwards the events to the target components and services. It uses the above Typescipt configurations to ensure that the state transitions are valid. Optionally, the state manager component can also handle authentication, authorization, pre-fetching data, etc.  
 
 ## Demo
 
