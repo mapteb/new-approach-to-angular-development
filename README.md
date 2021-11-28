@@ -26,9 +26,9 @@ A simple SPA with [thee views](https://mapteb.github.io/new-approach-to-angular-
 
 The events, application states are configured using Typescript enum variables like: [app-events.enum.ts](https://github.com/mapteb/new-approach-to-angular-development/blob/main/src/app/state-transitions-config/app-events.enum.ts) and [app-states.enum.ts](https://github.com/mapteb/new-approach-to-angular-development/blob/main/src/app/state-transitions-config/app-states.enum.ts) and the process methods identified in the state transitions table above are configured in TypeScript const variables like:[state-transions.ts](https://github.com/mapteb/new-approach-to-angular-development/blob/main/src/app/state-transitions-config/state-transitions.ts)
 
-## State Manager Component
+## State Transitions Manager Component
 
-The application components forward their events (along with a payload) to a navigation broker component. The [State Manager Component](https://github.com/mapteb/new-approach-to-angular-development/blob/main/src/app/state-transitions-manager/state-transitions-manager.component.ts) acts like a navigation broker that forwards the events to the target components and services. It uses the above Typescipt configurations to ensure that the state transitions are valid. Optionally, the state manager component can also handle athentication, authorization, pre-fetching data, etc.  
+The application components forward their events (along with a payload) to a navigation broker component. The [State Transitions Manager Component](https://github.com/mapteb/new-approach-to-angular-development/blob/main/src/app/state-transitions-manager/state-transitions-manager.component.ts) acts like a navigation broker that forwards the events to the target components and services. It uses the above Typescipt configurations to ensure that the state transitions are valid. Optionally, the state manager component can also handle athentication, authorization, pre-fetching data, etc.  
 
 ## Demo
 
@@ -38,4 +38,5 @@ A demo of this project can be viewed [here](https://mapteb.github.io/new-approac
 
 1. The proposed approach enables creating Angular applications that are fully state machine conformant and therefore robust.
 2. The architecture of the approach enables producing Angular code that follows clean code guidelines.
-3. The approach provides a template which makes it easy to develop Angular applications.
+3. The appoach does not allow state transitions by clicking the browser Back button or changing the URL. This feature would be of interest to critical applications like financial/banking applications.
+4. The approach provides a framework and a usage template which makes it easy to develop Angular applications.
