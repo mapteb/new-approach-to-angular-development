@@ -38,5 +38,5 @@ A demo of this project can be viewed [here](https://mapteb.github.io/new-approac
 
 1. The proposed approach enables creating Angular applications that are fully state machine conformant and therefore robust.
 2. The architecture of the approach enables producing Angular code that follows clean code guidelines.
-3. The appoach does not allow state transitions by clicking the browser Back button or changing the URL. This feature would be of interest to critical applications like financial/banking applications.
+3. The approach does not allow state transitions by clicking the browser Back button or by modifying the URL. This feature would be of interest to critical applications like financial/banking applications.
 4. The approach provides a framework and a usage template which makes it easy to develop Angular applications.
