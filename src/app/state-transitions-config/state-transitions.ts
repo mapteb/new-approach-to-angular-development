@@ -12,8 +12,12 @@ import { AppState } from './app-states.enum';
  * 
   UNKNOWN       -> home     -> processHome()     -> home_success     -> HOMEVIEW
   HOMEVIEW      -> products -> processProducts() -> products_success -> PRODUCTSVIEW
-  PRODUCTSVIEW  -> product  -> processProduct()  -> product_success  -> PODUCTVIEW
-  PODUCTVIEW    -> products -> processProducts() -> products_success -> PRODUCTSVIEW
+  --
+  PRODUCTSVIEW  -> product  -> processProduct()  -> product_success  -> PRODUCTVIEW
+  PRODUCTSVIEW  -> home     -> processHome()     -> home_success     -> HOMEVIEW
+  --
+  PRODUCTVIEW   -> products -> processProducts() -> products_success -> PRODUCTSVIEW
+  PRODUCTVIEW   -> home     -> processHome()     -> home_success     -> HOMEVIEW
  *
 */
 
@@ -21,7 +25,7 @@ import { AppState } from './app-states.enum';
  * Configure valid initial states that can raise the three events - home, products and product
  */
 export const PreEventToInitialStatesConfig = {
-    home: [AppState.UNKNOWN, AppState.HOMEVIEW, AppState.PRODUCTVIEW, AppState.PRODUCTSVIEW],
+    home: [AppState.UNKNOWN, AppState.PRODUCTSVIEW, AppState.PRODUCTVIEW],
     products: [AppState.HOMEVIEW, AppState.PRODUCTVIEW],
     product: [AppState.PRODUCTSVIEW]
 }

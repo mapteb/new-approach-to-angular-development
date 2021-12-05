@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
-import { AppEventModel } from '../state-transitions-config/app-event.model';
 import { PostEventToFinalStateConfig, 
          FinalStateToPathConfig, 
          PreEventToInitialStatesConfig, 
@@ -34,10 +33,12 @@ export class StateTransitionsManagerComponent extends BaseComponent implements O
   ngOnInit(): void {
     if (this.appEventModel && this.appEventModel.appEvent && this.appEventModel.appState &&
       PreEventToInitialStatesConfig[this.appEventModel.appEvent].includes(this.appEventModel.appState)) {
+      console.log(">> appState: ", this.appEventModel.appState);
       this.appEventModel = PreEventToProcessConfig[this.appEventModel.appEvent]
                             .process(this.appEventModel, this.appDataStore);
       this.appEventModel.appState = PostEventToFinalStateConfig[this.appEventModel.appEvent];
       const path = FinalStateToPathConfig[this.appEventModel.appState];
+      this.appDataStore.setCurrentView(this.appEventModel.appState);
       this.router.navigate([path], { state: { appEvent: this.appEventModel } });
     } else {
       this.router.navigate(["/**"]);

@@ -17,10 +17,14 @@ A simple SPA with [thee views](https://mapteb.github.io/new-approach-to-angular-
    
 <strong>Initial State</strong> | <strong>Pre-event</strong> | <strong>Processor</strong> | <strong>Post-event</strong>     | <strong>Final State</strong>
 ----------------- | ------------------ |------------------ | ------------------ | ------------------ 
-  UNKNOWN       -> | onload   -> | processOnload()   -> | onload_success   -> | HOMEVIEW
+  UNKNOWN       -> | home     -> | processHome()     -> | home_success     -> | HOMEVIEW
   HOMEVIEW      -> | products -> | processProducts() -> | products_success -> | PRODUCTSVIEW
-  PRODUCTSVIEW  -> | product  -> | processProduct()  -> | product_success  -> | PODUCTVIEW
-  PODUCTVIEW    -> | products -> | processProducts() -> | products_success -> | PRODUCTSVIEW
+  --
+  PRODUCTSVIEW  -> | product  -> | processProduct()  -> | product_success  -> | PRODUCTVIEW
+  PRODUCTSVIEW  -> | home     -> | processHome()     -> | home_success     -> | HOMEVIEW
+  --
+  PRODUCTVIEW   -> | products -> | processProducts() -> | products_success -> | PRODUCTSVIEW
+  PRODUCTVIEW   -> | home     -> | processHome()     -> | home_success     -> | HOMEVIEW
 
 ## Configurations:
 

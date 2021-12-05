@@ -219,14 +219,19 @@ __webpack_require__.r(__webpack_exports__);
  *
   UNKNOWN       -> home     -> processHome()     -> home_success     -> HOMEVIEW
   HOMEVIEW      -> products -> processProducts() -> products_success -> PRODUCTSVIEW
-  PRODUCTSVIEW  -> product  -> processProduct()  -> product_success  -> PODUCTVIEW
+  --
+  PRODUCTSVIEW  -> product  -> processProduct()  -> product_success  -> PRODUCTVIEW
+  PRODUCTSVIEW  -> home     -> processHome()     -> home_success     -> HOMEVIEW
+  --
+  PRODUCTVIEW   -> products -> processProducts() -> products_success -> PRODUCTSVIEW
+  PRODUCTVIEW   -> home     -> processHome()     -> home_success     -> HOMEVIEW
  *
 */
 /**
  * Configure valid initial states that can raise the three events - home, products and product
  */
 const PreEventToInitialStatesConfig = {
-    home: [_app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].UNKNOWN, _app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].HOMEVIEW, _app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].PRODUCTVIEW, _app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].PRODUCTSVIEW],
+    home: [_app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].UNKNOWN, _app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].PRODUCTSVIEW, _app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].PRODUCTVIEW],
     products: [_app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].HOMEVIEW, _app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].PRODUCTVIEW],
     product: [_app_states_enum__WEBPACK_IMPORTED_MODULE_2__["AppState"].PRODUCTSVIEW]
 };
@@ -234,7 +239,7 @@ const PreEventToInitialStatesConfig = {
  * Configure the process that should be triggered when a pre-event is raised
  * The functions used here can also be imported from individual files
  * These functions pre-fetch data so the Angular component can load fast
- * These functions can, optionally,
+ * These functions can, optionally, check user role for authorization
  */
 const PreEventToProcessConfig = {
     home: {
@@ -248,7 +253,6 @@ const PreEventToProcessConfig = {
     products: {
         process: function (appEventModel, appDataStore) {
             //TODO: check whether the user is signed in and has required ROLE
-            //TODO: pre-fetch data if needed
             const appData = new _app_data_model__WEBPACK_IMPORTED_MODULE_0__["AppData"]();
             appData.products = appDataStore.getProducts();
             appEventModel.appData = appData;
@@ -259,7 +263,6 @@ const PreEventToProcessConfig = {
     product: {
         process: function (appEventModel, appDataStore) {
             //TODO: check whether the user is signed in and has required ROLE
-            //TODO: pre-fetch data if needed
             const appData = new _app_data_model__WEBPACK_IMPORTED_MODULE_0__["AppData"]();
             appData.product = appDataStore.getProduct(appEventModel.appData.product.id);
             appEventModel.appData = appData;
@@ -331,10 +334,12 @@ class StateTransitionsManagerComponent extends _base_base_component__WEBPACK_IMP
     ngOnInit() {
         if (this.appEventModel && this.appEventModel.appEvent && this.appEventModel.appState &&
             _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["PreEventToInitialStatesConfig"][this.appEventModel.appEvent].includes(this.appEventModel.appState)) {
+            console.log(">> appState: ", this.appEventModel.appState);
             this.appEventModel = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["PreEventToProcessConfig"][this.appEventModel.appEvent]
                 .process(this.appEventModel, this.appDataStore);
             this.appEventModel.appState = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["PostEventToFinalStateConfig"][this.appEventModel.appEvent];
             const path = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["FinalStateToPathConfig"][this.appEventModel.appState];
+            this.appDataStore.setCurrentView(this.appEventModel.appState);
             this.router.navigate([path], { state: { appEvent: this.appEventModel } });
         }
         else {
@@ -435,7 +440,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "qCKp");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
-/* harmony import */ var _product_products_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../product/products.service */ "xNt9");
+/* harmony import */ var _state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../state-transitions-config/app-states.enum */ "phQ/");
+/* harmony import */ var _product_products_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../product/products.service */ "xNt9");
+
 
 
 
@@ -450,6 +457,14 @@ class AppDataStoreService {
         this.productsService = productsService;
         this.productsStore = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]([]);
         this.productStore = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
+        this.currentState = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](_state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_3__["AppState"].UNKNOWN);
+        this.currentState$ = this.currentState.asObservable();
+    }
+    setCurrentView(appState) {
+        this.currentState.next(appState);
+    }
+    getCurrentView() {
+        return this.currentState.getValue();
     }
     setProducts(products) {
         this.productsStore.next(products);
@@ -472,14 +487,14 @@ class AppDataStoreService {
         this.productsService.getProduct(id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1)).subscribe(res => this.setProduct(res));
     }
 }
-AppDataStoreService.ɵfac = function AppDataStoreService_Factory(t) { return new (t || AppDataStoreService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_product_products_service__WEBPACK_IMPORTED_MODULE_3__["ProductsService"])); };
+AppDataStoreService.ɵfac = function AppDataStoreService_Factory(t) { return new (t || AppDataStoreService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_product_products_service__WEBPACK_IMPORTED_MODULE_4__["ProductsService"])); };
 AppDataStoreService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: AppDataStoreService, factory: AppDataStoreService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](AppDataStoreService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: _product_products_service__WEBPACK_IMPORTED_MODULE_3__["ProductsService"] }]; }, null); })();
+    }], function () { return [{ type: _product_products_service__WEBPACK_IMPORTED_MODULE_4__["ProductsService"] }]; }, null); })();
 
 
 /***/ }),
@@ -810,6 +825,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _state_transitions_config_app_event_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../state-transitions-config/app-event.model */ "9p6y");
 /* harmony import */ var _state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../state-transitions-config/app-states.enum */ "phQ/");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _state_transitions_manager_app_data_store_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../state-transitions-manager/app-data-store.service */ "RGqP");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "ofXK");
+
+
 
 
 
@@ -821,10 +840,13 @@ __webpack_require__.r(__webpack_exports__);
  * site layout. Enables navigating to all other views.
  */
 class LayoutComponent extends _base_base_component__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"] {
-    constructor(router) {
+    constructor(router, appDataStoreService) {
         super(router);
         this.router = router;
+        this.appDataStoreService = appDataStoreService;
         this.title = "A New Approach to Angular Development";
+        this.isProducts = false;
+        this.currentState$ = appDataStoreService.currentState$;
     }
     ngOnInit() {
         // load the home page content
@@ -834,16 +856,16 @@ class LayoutComponent extends _base_base_component__WEBPACK_IMPORTED_MODULE_1__[
     // a handler for the user raised event
     // delegate the event handling to the base class
     handleHomeEvent(evt) {
-        this.handleAppEvent(evt, _state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_3__["AppState"].HOMEVIEW);
+        this.handleAppEvent(evt, this.appDataStoreService.getCurrentView());
     }
     // a handler for the user raised event
     // delegate the event handling to the base class
     handleProductsEvent(evt) {
-        this.handleAppEvent(evt, _state_transitions_config_app_states_enum__WEBPACK_IMPORTED_MODULE_3__["AppState"].HOMEVIEW);
+        this.handleAppEvent(evt, this.appDataStoreService.getCurrentView());
     }
 }
-LayoutComponent.ɵfac = function LayoutComponent_Factory(t) { return new (t || LayoutComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"])); };
-LayoutComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: LayoutComponent, selectors: [["app-layout"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵInheritDefinitionFeature"]], decls: 12, vars: 0, consts: [[1, "leftm2"], [1, "title"], [1, "mrgn1", 3, "click"]], template: function LayoutComponent_Template(rf, ctx) { if (rf & 1) {
+LayoutComponent.ɵfac = function LayoutComponent_Factory(t) { return new (t || LayoutComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_state_transitions_manager_app_data_store_service__WEBPACK_IMPORTED_MODULE_5__["AppDataStoreService"])); };
+LayoutComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: LayoutComponent, selectors: [["app-layout"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵInheritDefinitionFeature"]], decls: 14, vars: 6, consts: [[1, "leftm2"], [1, "title"], [1, "mrgn1", 3, "disabled", "click"]], template: function LayoutComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "section", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "h2", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Fancy Products Store");
@@ -851,21 +873,28 @@ LayoutComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "section");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LayoutComponent_Template_button_click_4_listener() { return ctx.handleHomeEvent("home"); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Home");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](5, "async");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Home");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "button", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LayoutComponent_Template_button_click_6_listener() { return ctx.handleProductsEvent("products"); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, "Products");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "hr");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "section", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "section", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](11, "router-outlet");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LayoutComponent_Template_button_click_7_listener() { return ctx.handleProductsEvent("products"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](8, "async");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, "Products");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterOutlet"]], styles: ["section.leftm[_ngcontent-%COMP%] {\r\n    margin-left: 5%;\r\n}\r\n\r\nsection.leftm2[_ngcontent-%COMP%] {\r\n    margin-left: 2%;\r\n}\r\n\r\n.mrgn1[_ngcontent-%COMP%] {\r\n    margin: 1px;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbGF5b3V0L2xheW91dC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtBQUNuQjs7QUFFQTtJQUNJLGVBQWU7QUFDbkI7O0FBRUE7SUFDSSxXQUFXO0FBQ2YiLCJmaWxlIjoic3JjL2FwcC9sYXlvdXQvbGF5b3V0LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJzZWN0aW9uLmxlZnRtIHtcclxuICAgIG1hcmdpbi1sZWZ0OiA1JTtcclxufVxyXG5cclxuc2VjdGlvbi5sZWZ0bTIge1xyXG4gICAgbWFyZ2luLWxlZnQ6IDIlO1xyXG59XHJcblxyXG4ubXJnbjEge1xyXG4gICAgbWFyZ2luOiAxcHg7XHJcbn0iXX0= */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](10, "hr");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "section", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "section", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](13, "router-outlet");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](5, 2, ctx.currentState$) === "HOMEVIEW");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](8, 4, ctx.currentState$) === "PRODUCTSVIEW");
+    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterOutlet"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_6__["AsyncPipe"]], styles: ["section.leftm[_ngcontent-%COMP%] {\r\n    margin-left: 5%;\r\n}\r\n\r\nsection.leftm2[_ngcontent-%COMP%] {\r\n    margin-left: 2%;\r\n}\r\n\r\n.mrgn1[_ngcontent-%COMP%] {\r\n    margin: 1px;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbGF5b3V0L2xheW91dC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtBQUNuQjs7QUFFQTtJQUNJLGVBQWU7QUFDbkI7O0FBRUE7SUFDSSxXQUFXO0FBQ2YiLCJmaWxlIjoic3JjL2FwcC9sYXlvdXQvbGF5b3V0LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJzZWN0aW9uLmxlZnRtIHtcclxuICAgIG1hcmdpbi1sZWZ0OiA1JTtcclxufVxyXG5cclxuc2VjdGlvbi5sZWZ0bTIge1xyXG4gICAgbWFyZ2luLWxlZnQ6IDIlO1xyXG59XHJcblxyXG4ubXJnbjEge1xyXG4gICAgbWFyZ2luOiAxcHg7XHJcbn0iXX0= */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](LayoutComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -873,7 +902,7 @@ LayoutComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
                 templateUrl: './layout.component.html',
                 styleUrls: ['./layout.component.css']
             }]
-    }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }]; }, null); })();
+    }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }, { type: _state_transitions_manager_app_data_store_service__WEBPACK_IMPORTED_MODULE_5__["AppDataStoreService"] }]; }, null); })();
 
 
 /***/ }),
