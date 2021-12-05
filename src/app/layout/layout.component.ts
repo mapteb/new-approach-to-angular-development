@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BaseComponent } from '../base/base.component';
@@ -13,7 +13,8 @@ import { AppDataStoreService } from '../state-transitions-manager/app-data-store
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css']
+  styleUrls: ['./layout.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutComponent extends BaseComponent implements OnInit {
 

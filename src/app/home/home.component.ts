@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
-import { AppState } from '../state-transitions-config/app-states.enum';
 
 /**
  * This Angular component displays the home page content
@@ -17,7 +16,5 @@ export class HomeComponent extends BaseComponent implements OnInit {
     super(router);
   }
 
-  ngOnInit(): void {
-    super.ngOnInit();
-  }
+  ngOnInit(): void { }
 }

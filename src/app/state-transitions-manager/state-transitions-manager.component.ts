@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
+import { AppEventModel } from '../state-transitions-config/app-event.model';
 import { PostEventToFinalStateConfig, 
          FinalStateToPathConfig, 
          PreEventToInitialStatesConfig, 
@@ -14,7 +15,7 @@ import { AppDataStoreService } from './app-data-store.service';
  * listed in state-transitions.ts
  */
 @Component({
-  selector: 'app-state-ransitions-manager',
+  selector: 'app-state-transitions-manager',
   template: ``
 })
 export class StateTransitionsManagerComponent extends BaseComponent implements OnInit {
@@ -31,11 +32,8 @@ export class StateTransitionsManagerComponent extends BaseComponent implements O
    * 4. Routes the request including an AppEventModel
    */
   ngOnInit(): void {
-    if (this.appEventModel && this.appEventModel.appEvent && this.appEventModel.appState &&
-      PreEventToInitialStatesConfig[this.appEventModel.appEvent].includes(this.appEventModel.appState)) {
-      console.log(">> appState: ", this.appEventModel.appState);
-      this.appEventModel = PreEventToProcessConfig[this.appEventModel.appEvent]
-                            .process(this.appEventModel, this.appDataStore);
+    if (this.isPreEventOriginValid(this.appEventModel)) {
+      this.appEventModel = this.callProcess(this.appEventModel, this.appDataStore);
       this.appEventModel.appState = PostEventToFinalStateConfig[this.appEventModel.appEvent];
       const path = FinalStateToPathConfig[this.appEventModel.appState];
       this.appDataStore.setCurrentView(this.appEventModel.appState);
@@ -43,6 +41,16 @@ export class StateTransitionsManagerComponent extends BaseComponent implements O
     } else {
       this.router.navigate(["/**"]);
     }
+  }
+
+  private isPreEventOriginValid(appEventModel: AppEventModel): boolean {
+    return appEventModel && appEventModel.appEvent && appEventModel.appState &&
+    PreEventToInitialStatesConfig[appEventModel.appEvent].includes(appEventModel.appState);
+  }
+
+  private callProcess(appEventModel: AppEventModel, appDataStore: AppDataStoreService): AppEventModel {
+    return appEventModel = PreEventToProcessConfig[appEventModel.appEvent]
+    .process(appEventModel, appDataStore);
   }
 }
 

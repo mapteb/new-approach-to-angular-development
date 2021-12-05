@@ -19,7 +19,6 @@ export class ProductsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void { 
-    super.ngOnInit();
     this.products = this.appEventModel.appData.products;
   }
 
