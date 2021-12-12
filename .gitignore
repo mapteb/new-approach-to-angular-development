@@ -47,3 +47,7 @@ debug.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Cypress
+/cypress/screenshots
+/cypress/videos

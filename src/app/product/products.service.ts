@@ -19,12 +19,12 @@ export class ProductsService {
   // Returns hard-coded data for demo purposes
   public getProducts(): Observable<Product[]> {
     //TODO: call a REST service to get the products
-    return of([new Product(1, "product_1", 12.11), new Product(2, "product_2", 22.70)]);
+    return of([new Product(1, "product_1", 11.11), new Product(2, "product_2", 22.22)]);
   }
 
   // Returns hard-coded data for demo purposes
   public getProduct(id: any): Observable<Product> {
     //TODO: call a REST service to get the product
-    return of(new Product(id, "product_" + id, 12.11*id));
+    return of(new Product(id, "product_" + id, 11.11*id));
   }
 }

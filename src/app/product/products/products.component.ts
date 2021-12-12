@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppEventModel } from 'src/app/state-transitions-config/app-event.model';
 import { BaseComponent } from '../../base/base.component';
 import { AppData } from '../../state-transitions-config/app-data.model';
 import { AppState } from '../../state-transitions-config/app-states.enum';

@@ -99,7 +99,7 @@
             "tsConfig": [
               "tsconfig.app.json",
               "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "cypress/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -107,9 +107,21 @@
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "new-approach-to-angular-development:serve",
+            "watch": true,
+            "headless": true
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "new-approach-to-angular-development:serve:production"
+            }
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
             "devServerTarget": "new-approach-to-angular-development:serve"
           },
           "configurations": {
@@ -117,8 +129,16 @@
               "devServerTarget": "new-approach-to-angular-development:serve:production"
             }
           }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": true
+          }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "new-approach-to-angular-development"
 }

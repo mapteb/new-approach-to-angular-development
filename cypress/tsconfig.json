@@ -1,0 +1,8 @@
+{
+  "extends": "../tsconfig.json",
+  "include": ["**/*.ts", "integration/spec.ts-bak"],
+  "compilerOptions": {
+    "sourceMap": false,
+    "types": ["cypress"]
+  }
+}

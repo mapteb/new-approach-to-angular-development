@@ -14,12 +14,12 @@ import { AppState } from '../state-transitions-config/app-states.enum';
 })
 export class AppDataStoreService {
 
-  private productsStore = new BehaviorSubject<Product[]>([]);
-  private productStore = new BehaviorSubject<Product>(null);
-  private currentState = new BehaviorSubject<AppState>(AppState.UNKNOWN);
+  protected productsStore = new BehaviorSubject<Product[]>([]);
+  protected productStore = new BehaviorSubject<Product>(null);
+  protected currentState = new BehaviorSubject<AppState>(AppState.UNKNOWN);
   public currentState$ = this.currentState.asObservable();
 
-  constructor(private productsService: ProductsService) { }
+  constructor(protected productsService: ProductsService) { }
 
   setCurrentView(appState: AppState) {
     this.currentState.next(appState);
@@ -29,7 +29,7 @@ export class AppDataStoreService {
     return this.currentState.getValue();
   }
 
-  setProducts(products: Product[]) {
+  public setProducts(products: Product[]) {
     this.productsStore.next(products);
   }
 

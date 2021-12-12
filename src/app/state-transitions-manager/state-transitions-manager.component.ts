@@ -32,12 +32,16 @@ export class StateTransitionsManagerComponent extends BaseComponent implements O
    * 4. Routes the request including an AppEventModel
    */
   ngOnInit(): void {
-    if (this.isPreEventOriginValid(this.appEventModel)) {
-      this.appEventModel = this.callProcess(this.appEventModel, this.appDataStore);
-      this.appEventModel.appState = PostEventToFinalStateConfig[this.appEventModel.appEvent];
-      const path = FinalStateToPathConfig[this.appEventModel.appState];
-      this.appDataStore.setCurrentView(this.appEventModel.appState);
-      this.router.navigate([path], { state: { appEvent: this.appEventModel } });
+    this.doTransition(this.appEventModel, this.appDataStore);
+  }
+
+  private doTransition(appEventModel: AppEventModel, appDataStore: AppDataStoreService) {
+    if (this.isPreEventOriginValid(appEventModel)) {
+      appEventModel = this.callProcess(appEventModel, appDataStore);
+      appEventModel.appState = PostEventToFinalStateConfig[appEventModel.appEvent];
+      const path = FinalStateToPathConfig[appEventModel.appState];
+      appDataStore.setCurrentView(appEventModel.appState);
+      this.router.navigate([path], { state: { appEvent: appEventModel } });
     } else {
       this.router.navigate(["/**"]);
     }
