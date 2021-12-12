@@ -55,7 +55,6 @@ class ProductsComponent extends _base_base_component__WEBPACK_IMPORTED_MODULE_1_
         this.products = [];
     }
     ngOnInit() {
-        super.ngOnInit();
         this.products = this.appEventModel.appData.products;
     }
     // a handler for the user raised event
@@ -144,9 +143,7 @@ class HomeComponent extends _base_base_component__WEBPACK_IMPORTED_MODULE_1__["B
         super(router);
         this.router = router;
     }
-    ngOnInit() {
-        super.ngOnInit();
-    }
+    ngOnInit() { }
 }
 HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
 HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["app-home"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵInheritDefinitionFeature"]], decls: 1, vars: 0, template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
@@ -332,27 +329,35 @@ class StateTransitionsManagerComponent extends _base_base_component__WEBPACK_IMP
      * 4. Routes the request including an AppEventModel
      */
     ngOnInit() {
-        if (this.appEventModel && this.appEventModel.appEvent && this.appEventModel.appState &&
-            _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["PreEventToInitialStatesConfig"][this.appEventModel.appEvent].includes(this.appEventModel.appState)) {
-            console.log(">> appState: ", this.appEventModel.appState);
-            this.appEventModel = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["PreEventToProcessConfig"][this.appEventModel.appEvent]
-                .process(this.appEventModel, this.appDataStore);
-            this.appEventModel.appState = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["PostEventToFinalStateConfig"][this.appEventModel.appEvent];
-            const path = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["FinalStateToPathConfig"][this.appEventModel.appState];
-            this.appDataStore.setCurrentView(this.appEventModel.appState);
-            this.router.navigate([path], { state: { appEvent: this.appEventModel } });
+        this.doTransition(this.appEventModel, this.appDataStore);
+    }
+    doTransition(appEventModel, appDataStore) {
+        if (this.isPreEventOriginValid(appEventModel)) {
+            appEventModel = this.callProcess(appEventModel, appDataStore);
+            appEventModel.appState = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["PostEventToFinalStateConfig"][appEventModel.appEvent];
+            const path = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["FinalStateToPathConfig"][appEventModel.appState];
+            appDataStore.setCurrentView(appEventModel.appState);
+            this.router.navigate([path], { state: { appEvent: appEventModel } });
         }
         else {
             this.router.navigate(["/**"]);
         }
     }
+    isPreEventOriginValid(appEventModel) {
+        return appEventModel && appEventModel.appEvent && appEventModel.appState &&
+            _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["PreEventToInitialStatesConfig"][appEventModel.appEvent].includes(appEventModel.appState);
+    }
+    callProcess(appEventModel, appDataStore) {
+        return appEventModel = _state_transitions_config_state_transitions__WEBPACK_IMPORTED_MODULE_2__["PreEventToProcessConfig"][appEventModel.appEvent]
+            .process(appEventModel, appDataStore);
+    }
 }
 StateTransitionsManagerComponent.ɵfac = function StateTransitionsManagerComponent_Factory(t) { return new (t || StateTransitionsManagerComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_app_data_store_service__WEBPACK_IMPORTED_MODULE_4__["AppDataStoreService"])); };
-StateTransitionsManagerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: StateTransitionsManagerComponent, selectors: [["app-state-ransitions-manager"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵInheritDefinitionFeature"]], decls: 0, vars: 0, template: function StateTransitionsManagerComponent_Template(rf, ctx) { }, encapsulation: 2 });
+StateTransitionsManagerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: StateTransitionsManagerComponent, selectors: [["app-state-transitions-manager"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵInheritDefinitionFeature"]], decls: 0, vars: 0, template: function StateTransitionsManagerComponent_Template(rf, ctx) { }, encapsulation: 2 });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](StateTransitionsManagerComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
-                selector: 'app-state-ransitions-manager',
+                selector: 'app-state-transitions-manager',
                 template: ``
             }]
     }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }, { type: _app_data_store_service__WEBPACK_IMPORTED_MODULE_4__["AppDataStoreService"] }]; }, null); })();
@@ -389,7 +394,6 @@ class ProductComponent extends _base_base_component__WEBPACK_IMPORTED_MODULE_1__
         this.router = router;
     }
     ngOnInit() {
-        super.ngOnInit();
         this.product = this.appEventModel.appData.product;
     }
     // a handler for the user raised event
@@ -679,11 +683,7 @@ class BaseComponent {
             }
         }
     }
-    ngOnInit() {
-        if (!this.appEventModel) {
-            this.handleAppEvent(null, null);
-        }
-    }
+    ngOnInit() { }
     handleAppEvent(evt, appState, appData) {
         if (evt && this.appEventModel) {
             this.appEventModel.appEvent = _state_transitions_config_app_events_enum__WEBPACK_IMPORTED_MODULE_1__["AppEvent"][evt];
@@ -894,13 +894,14 @@ LayoutComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](5, 2, ctx.currentState$) === "HOMEVIEW");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](8, 4, ctx.currentState$) === "PRODUCTSVIEW");
-    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterOutlet"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_6__["AsyncPipe"]], styles: ["section.leftm[_ngcontent-%COMP%] {\r\n    margin-left: 5%;\r\n}\r\n\r\nsection.leftm2[_ngcontent-%COMP%] {\r\n    margin-left: 2%;\r\n}\r\n\r\n.mrgn1[_ngcontent-%COMP%] {\r\n    margin: 1px;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbGF5b3V0L2xheW91dC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtBQUNuQjs7QUFFQTtJQUNJLGVBQWU7QUFDbkI7O0FBRUE7SUFDSSxXQUFXO0FBQ2YiLCJmaWxlIjoic3JjL2FwcC9sYXlvdXQvbGF5b3V0LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJzZWN0aW9uLmxlZnRtIHtcclxuICAgIG1hcmdpbi1sZWZ0OiA1JTtcclxufVxyXG5cclxuc2VjdGlvbi5sZWZ0bTIge1xyXG4gICAgbWFyZ2luLWxlZnQ6IDIlO1xyXG59XHJcblxyXG4ubXJnbjEge1xyXG4gICAgbWFyZ2luOiAxcHg7XHJcbn0iXX0= */"] });
+    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterOutlet"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_6__["AsyncPipe"]], styles: ["section.leftm[_ngcontent-%COMP%] {\r\n    margin-left: 5%;\r\n}\r\n\r\nsection.leftm2[_ngcontent-%COMP%] {\r\n    margin-left: 2%;\r\n}\r\n\r\n.mrgn1[_ngcontent-%COMP%] {\r\n    margin: 1px;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbGF5b3V0L2xheW91dC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtBQUNuQjs7QUFFQTtJQUNJLGVBQWU7QUFDbkI7O0FBRUE7SUFDSSxXQUFXO0FBQ2YiLCJmaWxlIjoic3JjL2FwcC9sYXlvdXQvbGF5b3V0LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJzZWN0aW9uLmxlZnRtIHtcclxuICAgIG1hcmdpbi1sZWZ0OiA1JTtcclxufVxyXG5cclxuc2VjdGlvbi5sZWZ0bTIge1xyXG4gICAgbWFyZ2luLWxlZnQ6IDIlO1xyXG59XHJcblxyXG4ubXJnbjEge1xyXG4gICAgbWFyZ2luOiAxcHg7XHJcbn0iXX0= */"], changeDetection: 0 });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](LayoutComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
                 selector: 'app-layout',
                 templateUrl: './layout.component.html',
-                styleUrls: ['./layout.component.css']
+                styleUrls: ['./layout.component.css'],
+                changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush
             }]
     }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }, { type: _state_transitions_manager_app_data_store_service__WEBPACK_IMPORTED_MODULE_5__["AppDataStoreService"] }]; }, null); })();
 
@@ -1014,12 +1015,12 @@ class ProductsService {
     // Returns hard-coded data for demo purposes
     getProducts() {
         //TODO: call a REST service to get the products
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])([new _product_model__WEBPACK_IMPORTED_MODULE_2__["Product"](1, "product_1", 12.11), new _product_model__WEBPACK_IMPORTED_MODULE_2__["Product"](2, "product_2", 22.70)]);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])([new _product_model__WEBPACK_IMPORTED_MODULE_2__["Product"](1, "product_1", 11.11), new _product_model__WEBPACK_IMPORTED_MODULE_2__["Product"](2, "product_2", 22.22)]);
     }
     // Returns hard-coded data for demo purposes
     getProduct(id) {
         //TODO: call a REST service to get the product
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(new _product_model__WEBPACK_IMPORTED_MODULE_2__["Product"](id, "product_" + id, 12.11 * id));
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(new _product_model__WEBPACK_IMPORTED_MODULE_2__["Product"](id, "product_" + id, 11.11 * id));
     }
 }
 ProductsService.ɵfac = function ProductsService_Factory(t) { return new (t || ProductsService)(); };
