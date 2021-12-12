@@ -34,9 +34,16 @@ The events, application states are configured using Typescript enum variables li
 
 The application components forward their events (along with a payload) to a navigation broker component. The [State Transitions Manager Component](https://github.com/mapteb/new-approach-to-angular-development/blob/main/src/app/state-transitions-manager/state-transitions-manager.component.ts) acts like a navigation broker that forwards the events to the target components and services. It uses the above Typescipt configurations to ensure that the state transitions are valid. Optionally, the state manager component can also handle authentication, authorization, pre-fetching data, etc.  
 
+## Test Cases
+
+### Unit Testing
+For unit testing we can test each state transition in isolation. Interestingly, this can be done by testing the doTransition() method in the StateTransitionsManagerComponent for various initial states and pre-events and then asserting for the final paths. The file test-state-transitions.spec.ts has the unit tests for all the state transitions. This project uses Jasmine for unit testing. The command "ng test" runs the tests.
+### Integration Testing
+This project uses Cypress to perform the integration tests. The file cypress-integration-tests.spec.ts has all the test cases. The command "ng e2e" runs all test cases.
+
 ## Demo
 
-A demo of this project can be viewed [here](https://mapteb.github.io/new-approach-to-angular-development) where all the four state transitions listed above can be tested.
+A demo of this project can be viewed [here](https://mapteb.github.io/new-approach-to-angular-development) where all the four state transitions listed above can be reviewed.
 
 ## Benefits
 
@@ -44,3 +51,4 @@ A demo of this project can be viewed [here](https://mapteb.github.io/new-approac
 2. The architecture of the approach enables producing Angular code that follows clean code guidelines.
 3. The approach does not allow state transitions by clicking the browser Back button or by modifying the URL. This feature would be of interest to critical applications like financial/banking applications.
 4. The approach provides a framework and a usage template which makes it easy to develop Angular applications.
+5. The state transitions list simplifies writing unit tests and also serves as a check list for test cases.
