@@ -22,7 +22,6 @@
     "@angular/platform-browser-dynamic": "~10.1.5",
     "@angular/router": "~10.1.5",
     "rxjs": "~6.6.0",
-    "rxjs-observable-store": "^3.0.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
@@ -30,7 +29,6 @@
     "@angular-devkit/build-angular": "~0.1001.6",
     "@angular/cli": "~10.1.6",
     "@angular/compiler-cli": "~10.1.5",
-    "@ngneat/spectator": "^6.0.0",
     "@types/jest": "^26.0.14",
     "@cypress/schematic": "^1.6.0",
     "@types/jasmine": "~3.5.0",
