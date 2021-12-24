@@ -1,3 +1,4 @@
+import { identifierName, Identifiers } from '@angular/compiler';
 import { AppDataStoreService } from '../state-transitions-manager/app-data-store.service';
 import { AppData } from './app-data.model';
 import { AppEventModel } from './app-event.model';
@@ -21,6 +22,10 @@ import { AppState } from './app-states.enum';
  *
 */
 
+interface IDictionary<TValue> {
+    [id: string]: TValue;
+}
+
 /**
  * Configure valid initial states that can raise the three events - home, products and product
  */
@@ -28,7 +33,7 @@ export const PreEventToInitialStatesConfig = {
     home: [AppState.UNKNOWN, AppState.PRODUCTSVIEW, AppState.PRODUCTVIEW],
     products: [AppState.HOMEVIEW, AppState.PRODUCTVIEW],
     product: [AppState.PRODUCTSVIEW]
-}
+} as IDictionary<AppState[]>
 
 /** 
  * Configure the process that should be triggered when a pre-event is raised
@@ -62,13 +67,16 @@ export const PreEventToProcessConfig = {
             AppEventModel {
             //TODO: check whether the user is signed in and has required ROLE
             const appData = new AppData();
-            appData.product = appDataStore.getProduct(appEventModel.appData.product.id);
+            if (appEventModel.appData.product.id &&
+                    appEventModel.appData.product.id> 0) {
+                appData.product = appDataStore.getProduct(appEventModel.appData.product.id);
+            }
             appEventModel.appData = appData;
             appEventModel.appEvent = AppEvent.product_success;
             return appEventModel;
         }
     }
-}
+} as {[id: string]: {[key: string]: any}}
 
 /**
  * Configure the post-event to final state mappings
@@ -77,7 +85,7 @@ export const PostEventToFinalStateConfig = {
     home_success: AppState.HOMEVIEW,
     products_success: AppState.PRODUCTSVIEW,
     product_success: AppState.PRODUCTVIEW
-}
+} as IDictionary<AppState>
 
 /**
  * Configure final state to path mappings
@@ -86,4 +94,4 @@ export const FinalStateToPathConfig = {
     HOMEVIEW: "home",
     PRODUCTSVIEW: "products",
     PRODUCTVIEW: "product",
-}
+} as IDictionary<string>

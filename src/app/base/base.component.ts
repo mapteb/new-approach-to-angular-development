@@ -18,16 +18,16 @@ export class BaseComponent implements OnInit {
 
   constructor(protected router: Router) {
     if (this.router.getCurrentNavigation()) {
-      const navigationExtras: NavigationExtras = this.router.getCurrentNavigation().extras;
+      const navigationExtras = this.router.getCurrentNavigation()?.extras;
       if (navigationExtras && navigationExtras.state) {
-        this.appEventModel = navigationExtras.state.appEvent;
+        this.appEventModel = navigationExtras.state['appEvent'];
       } 
     }
   }
 
   ngOnInit(): void { }
 
-  protected handleAppEvent(evt: string, appState: AppState, appData?: AppData) {
+  protected handleAppEvent(evt: keyof typeof AppEvent, appState: AppState, appData?: AppData) {
     if (evt && this.appEventModel) {
       this.appEventModel.appEvent = AppEvent[evt];
       this.appEventModel.appState = appState;

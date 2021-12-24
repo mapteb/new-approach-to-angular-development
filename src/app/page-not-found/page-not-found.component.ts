@@ -16,11 +16,11 @@ export class PageNotFoundComponent extends BaseComponent implements OnInit {
 
   message = '';
 
-  constructor(protected router: Router) {
+  constructor(protected override router: Router) {
     super(router);
   }
 
-  ngOnInit() {
+  override ngOnInit() {
     if (this.appEventModel) {
       this.message = this.appEventModel.message.error;
     } else {

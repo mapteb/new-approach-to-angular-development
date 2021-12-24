@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../base/base.component';
 import { AppEventModel } from '../state-transitions-config/app-event.model';
+import { AppEvent } from '../state-transitions-config/app-events.enum';
 import { PostEventToFinalStateConfig, 
          FinalStateToPathConfig, 
          PreEventToInitialStatesConfig, 
@@ -20,7 +21,7 @@ import { AppDataStoreService } from './app-data-store.service';
 })
 export class StateTransitionsManagerComponent extends BaseComponent implements OnInit {
 
-  constructor(protected router: Router, private appDataStore: AppDataStoreService) {
+  constructor(protected override router: Router, private appDataStore: AppDataStoreService) {
     super(router);
   }
 
@@ -31,7 +32,7 @@ export class StateTransitionsManagerComponent extends BaseComponent implements O
    * 3. Figures the path corresponding to the post-state returned by the process
    * 4. Routes the request including an AppEventModel
    */
-  ngOnInit(): void {
+   override ngOnInit(): void {
     this.doTransition(this.appEventModel, this.appDataStore);
   }
 
@@ -53,8 +54,7 @@ export class StateTransitionsManagerComponent extends BaseComponent implements O
   }
 
   private callProcess(appEventModel: AppEventModel, appDataStore: AppDataStoreService): AppEventModel {
-    return appEventModel = PreEventToProcessConfig[appEventModel.appEvent]
-    .process(appEventModel, appDataStore);
+    return appEventModel = PreEventToProcessConfig[appEventModel.appEvent]['process'](appEventModel, appDataStore);
   }
 }
 

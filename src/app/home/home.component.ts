@@ -12,9 +12,9 @@ import { BaseComponent } from '../base/base.component';
 })
 export class HomeComponent extends BaseComponent implements OnInit {
 
-  constructor(protected router: Router) {
+  constructor(protected override router: Router) {
     super(router);
   }
 
-  ngOnInit(): void { }
+  override ngOnInit(): void { }
 }

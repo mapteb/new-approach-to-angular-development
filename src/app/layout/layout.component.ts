@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BaseComponent } from '../base/base.component';
 import { AppEventModel } from '../state-transitions-config/app-event.model';
+import { AppEvent } from '../state-transitions-config/app-events.enum';
 import { AppState } from '../state-transitions-config/app-states.enum';
 import { AppDataStoreService } from '../state-transitions-manager/app-data-store.service';
 
@@ -22,12 +23,12 @@ export class LayoutComponent extends BaseComponent implements OnInit {
   currentState$: Observable<AppState>;
   isProducts = false;
 
-  constructor(protected router: Router, private appDataStoreService: AppDataStoreService) {
+  constructor(protected override router: Router, private appDataStoreService: AppDataStoreService) {
     super(router);
     this.currentState$ = appDataStoreService.currentState$;
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     // load the home page content
     this.appEventModel = new AppEventModel();
     this.handleAppEvent('home', AppState.UNKNOWN);
@@ -35,13 +36,13 @@ export class LayoutComponent extends BaseComponent implements OnInit {
 
   // a handler for the user raised event
   // delegate the event handling to the base class
-  handleHomeEvent(evt: string) {
+  handleHomeEvent(evt: keyof typeof AppEvent) {
     this.handleAppEvent(evt, this.appDataStoreService.getCurrentView());
   }
 
   // a handler for the user raised event
   // delegate the event handling to the base class
-  handleProductsEvent(evt: string) {
+  handleProductsEvent(evt: keyof typeof AppEvent) {
     this.handleAppEvent(evt, this.appDataStoreService.getCurrentView());
   }
 }

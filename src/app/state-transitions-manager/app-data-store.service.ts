@@ -15,7 +15,7 @@ import { AppState } from '../state-transitions-config/app-states.enum';
 export class AppDataStoreService {
 
   protected productsStore = new BehaviorSubject<Product[]>([]);
-  protected productStore = new BehaviorSubject<Product>(null);
+  protected productStore = new BehaviorSubject<Product>(new Product());
   protected currentState = new BehaviorSubject<AppState>(AppState.UNKNOWN);
   public currentState$ = this.currentState.asObservable();
 
