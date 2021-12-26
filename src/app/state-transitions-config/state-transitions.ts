@@ -12,6 +12,7 @@ import { AppState } from './app-states.enum';
  * here but can be easily added as aditional transitions
  * 
   UNKNOWN       -> home     -> processHome()     -> home_success     -> HOMEVIEW
+  UNKNOWN       -> products -> processProducts() -> products_success -> PRODUCTSVIEW
   HOMEVIEW      -> products -> processProducts() -> products_success -> PRODUCTSVIEW
   --
   PRODUCTSVIEW  -> product  -> processProduct()  -> product_success  -> PRODUCTVIEW
@@ -31,7 +32,7 @@ interface IDictionary<TValue> {
  */
 export const PreEventToInitialStatesConfig = {
     home: [AppState.UNKNOWN, AppState.PRODUCTSVIEW, AppState.PRODUCTVIEW],
-    products: [AppState.HOMEVIEW, AppState.PRODUCTVIEW],
+    products: [AppState.UNKNOWN, AppState.HOMEVIEW, AppState.PRODUCTVIEW],
     product: [AppState.PRODUCTSVIEW]
 } as IDictionary<AppState[]>
 

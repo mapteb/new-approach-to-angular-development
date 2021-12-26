@@ -29,9 +29,14 @@ export class LayoutComponent extends BaseComponent implements OnInit {
   }
 
   override ngOnInit(): void {
-    // load the home page content
-    this.appEventModel = new AppEventModel();
-    this.handleAppEvent('home', AppState.UNKNOWN);
+    if (this.appEventModel) {
+      // the user is accessing a bookmarked url
+      this.handleAppEvent(this.appEventModel.appEvent, this.appEventModel.appState);
+    } else {
+      // otherwise load the home page content
+      this.appEventModel = new AppEventModel();
+      this.handleAppEvent('home', AppState.UNKNOWN);
+    }
   }
 
   // a handler for the user raised event

@@ -23,6 +23,14 @@ export class BaseComponent implements OnInit {
         this.appEventModel = navigationExtras.state['appEvent'];
       } 
     }
+    // process a bookmarked page
+    const pathname = (new URL(window.location.href)).pathname;
+    if (!this.appEventModel && pathname === '/products') {
+      console.log(">> onto to products");
+      this.appEventModel = new AppEventModel();
+      this.appEventModel.appEvent = AppEvent.products;
+      this.appEventModel.appState = AppState.UNKNOWN;
+    }
   }
 
   ngOnInit(): void { }
