@@ -45,6 +45,18 @@ describe('Unit test each state transition:', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['home'], { state: { appEvent: appEventModel } });
   });
 
+  it('From unknown state when products event triggered then should be routed to the path /products', () => {
+    const appEventModel = new AppEventModel();
+    const appData = new AppData();
+    appEventModel.appState = AppState.UNKNOWN;
+    appEventModel.appEvent = AppEvent.products;
+    appEventModel.appData = new AppData();
+    const navigateSpy = spyOn(router, 'navigate');
+    //@ts-ignore
+    component.doTransition(appEventModel, appDataStore)
+    expect(navigateSpy).toHaveBeenCalledWith(['products'], { state: { appEvent: appEventModel } });
+  });
+
   it('From home view state when products event triggered then should be routed to the path /products', () => {
     const appEventModel = new AppEventModel();
     const appData = new AppData();

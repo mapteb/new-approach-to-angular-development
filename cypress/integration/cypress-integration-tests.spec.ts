@@ -3,6 +3,10 @@ describe('Walkthrough all state transitions', () => {
     cy.visit('/')
     cy.contains('Home works!')
   })
+  it('From unknown state, when /products accessed, should load products page', () => {
+    cy.visit('/products')
+    cy.contains('List of Products')
+  })
   it('From home view state, when Products button clicked, should load Products List page', () => {
     cy.visit('/')
     cy.contains('Home works!')
