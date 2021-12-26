@@ -94,5 +94,5 @@ export const PostEventToFinalStateConfig = {
 export const FinalStateToPathConfig = {
     HOMEVIEW: "home",
     PRODUCTSVIEW: "products",
-    PRODUCTVIEW: "product",
+    PRODUCTVIEW: "products/product",
 } as IDictionary<string>

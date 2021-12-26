@@ -7,8 +7,7 @@ import { ProductsComponent } from './product/products/products.component';
 import { ProductComponent } from './product/product/product.component';
 
 const appRoutes: Routes = [
-  { path: 'product', component: ProductComponent },
-  { path: 'products', component: ProductsComponent },
+  { path: 'products', loadChildren: () => import('./product/product.module').then(m => m.ProductModule) },
   { path: 'home', component: HomeComponent },
   { path: 'state-transitions-manager', component: StateTransitionsManagerComponent },
   { path: '',   redirectTo: '/home', pathMatch: 'full' },

@@ -6,26 +6,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ProductsComponent } from './product/products/products.component';
-import { ProductComponent } from './product/product/product.component';
 import { BaseComponent } from './base/base.component';
 import { LayoutComponent } from './layout/layout.component';
+import { StateTransitionsManagerComponent } from './state-transitions-manager/state-transitions-manager.component';
 
 @NgModule({
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    AppRoutingModule,
   ],
   declarations: [
     AppComponent,
     HomeComponent,
     PageNotFoundComponent,
-    ProductsComponent,
-    ProductComponent,
     BaseComponent,
-    LayoutComponent
+    LayoutComponent,
+    StateTransitionsManagerComponent
   ],
   bootstrap: [ AppComponent ]
 })
