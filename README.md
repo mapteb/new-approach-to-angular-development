@@ -54,7 +54,7 @@ Support for modules and lazy loading are discussed in a different branch - [modu
 ## Benefits
 
 1. The proposed approach enables creating Angular applications that are fully state machine conformant and therefore robust.
-2. The approach does not allow state transitions by clicking the browser Back button or by modifying the URL. This feature would be of interest to critical applications like financial/banking applications.
+2. The approach does not allow state transitions by clicking the browser Back button or by modifying the URL. This feature would be of interest to security critical applications like financial/banking applications.
 3. The architecture of the approach enables producing Angular code that follows clean code guidelines.
 4. The approach provides a framework and a usage template which makes it easy to develop Angular applications.
 5. The state transitions list simplifies writing unit tests and also serves as a check list for test cases.
