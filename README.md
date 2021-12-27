@@ -37,18 +37,24 @@ The application components forward their events (along with a payload) to a navi
 ## Test Cases
 
 ### Unit Testing
-For unit testing we can test each state transition in isolation. Interestingly, this can be done by testing the doTransition() method in the StateTransitionsManagerComponent for various initial states and pre-events and then asserting for the final paths. The file test-state-transitions.spec.ts has the unit tests for all the state transitions. This project uses Jasmine for unit testing. The command "ng test" runs the tests.
+For unit testing we can test each state transition in isolation. Interestingly, this can be done by testing the doTransition() method in the StateTransitionsManagerComponent for various initial states and pre-events and then asserting for the final paths. The file [test-state-transitions.spec.ts](https://github.com/mapteb/new-approach-to-angular-development/blob/main/src/app/test/test-state-transitions.spec.ts) has the unit tests for all the state transitions. This project uses Jasmine for unit testing. The command "ng test" runs the tests.
 ### Integration Testing
-This project uses Cypress to perform the integration tests. The file cypress-integration-tests.spec.ts has all the test cases. The command "ng e2e" runs all test cases.
+This project uses Cypress to perform the integration tests. The file [cypress-integration-tests.spec.ts](https://github.com/mapteb/new-approach-to-angular-development/blob/main/cypress/integration/cypress-integration-tests.spec.ts) has all the test cases. The command "ng e2e" runs all test cases.
 
 ## Demo
 
 A demo of this project can be viewed [here](https://mapteb.github.io/new-approach-to-angular-development) where all the four state transitions listed above can be reviewed.
 
+## Next Steps
+
+Support for bookmarkable intermediary view states is discussed in the branch [bookmark-a-view-state](https://github.com/mapteb/new-approach-to-angular-development/tree/bookmark-a-view-state).
+
+Support for modules and lazy loading are discussed in a different branch - [modules-lazy-loading](https://github.com/mapteb/new-approach-to-angular-development/tree/modules-lazy-loading)
+
 ## Benefits
 
 1. The proposed approach enables creating Angular applications that are fully state machine conformant and therefore robust.
-2. The architecture of the approach enables producing Angular code that follows clean code guidelines.
-3. The approach does not allow state transitions by clicking the browser Back button or by modifying the URL. This feature would be of interest to critical applications like financial/banking applications.
+2. The approach does not allow state transitions by clicking the browser Back button or by modifying the URL. This feature would be of interest to critical applications like financial/banking applications.
+3. The architecture of the approach enables producing Angular code that follows clean code guidelines.
 4. The approach provides a framework and a usage template which makes it easy to develop Angular applications.
 5. The state transitions list simplifies writing unit tests and also serves as a check list for test cases.
